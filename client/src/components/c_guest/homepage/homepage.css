@@ -1,0 +1,35 @@
+.about{
+    background: #eae6e5;
+    
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+/* .breakLine1{
+    display: flex;
+    width: 90%;
+    height: .4vh;
+    background-color: rgb(145, 20, 20);
+    margin: auto;
+} */
+
+.about-title{
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.about-title h1{
+    font-size: larger;
+    font-weight: bold;
+}
+
+/* .dot{
+    height: 10px;
+    width: 20px;
+    background-color: rgb(94, 6, 6);
+    border-radius: 50px;
+    margin: auto;
+} */

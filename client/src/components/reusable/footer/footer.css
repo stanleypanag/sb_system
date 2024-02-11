@@ -1,0 +1,9 @@
+.footer-text{
+    margin: auto;
+    justify-content: center;
+}
+
+.footer-text img{
+    height: 15px;
+    margin-right: 5px;
+}
