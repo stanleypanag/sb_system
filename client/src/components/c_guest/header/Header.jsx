@@ -8,16 +8,16 @@ const Header = () => {
   return (
     <>
       {/* <!-- Announcement Banner --> */}
-      <div class="bg-gray-300">
+      <div class="bg-gray-800">
         <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 mx-auto">
           {/* <!-- Grid --> */}
           <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
             <div class="text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
-              <p class="me-5 inline-block text-sm font-semibold text-gray-800">
+              <p class="me-5 inline-block text-sm font-semibold text-gray-300">
                 Want to download a copy?
               </p>
               <Link
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border-2 border-gray-800 text-gray-800 hover:border-blue-900 hover:text-blue-900 disabled:opacity-50 disabled:pointer-events-none"
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border-2 border-gray-300 text-gray-300 hover:border-blue-900 hover:text-blue-900 disabled:opacity-50 disabled:pointer-events-none"
                 to={"/register"}
               >
                 Sign up
@@ -27,11 +27,11 @@ const Header = () => {
 
             <div class="brand-logo flex items-center order-1">
               <Link
-                class="inline-flex items-center gap-x-2 text-xl font-semibold"
+                class="inline-flex items-center gap-x-4 text-xl font-semibold"
                 to={"/"}
               >
-                <img class="w-[4rem] h-auto" src={Logo} alt="Logo" />
-                <h1 className="tracking-widest uppercase  font-semibold text-gray-800 text-xs">
+                <img class="w-[4rem] h-auto order-1" src={Logo} alt="Logo" />
+                <h1 className="tracking-wide uppercase font-bold text-gray-200 text-xl order-2">
                   Naic Resolutions and Ordinances
                 </h1>
               </Link>
@@ -44,13 +44,13 @@ const Header = () => {
       {/* <!-- End Announcement Banner --> */}
 
       {/* <!-- ========== HEADER ========== --> */}
-      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-800 text-sm sm:pb-0">
+      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-700 text-sm sm:pb-0">
         <nav
           class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
           aria-label="Global"
         >
           <div class="flex items-center justify-between">
-            <div className="join border border-gray-500 rounded-full border-2">
+            <div className="join border border-gray-400 rounded-full border-2">
               <div>
                 <div>
                   <input
@@ -59,7 +59,7 @@ const Header = () => {
                   />
                 </div>
               </div>
-              <select className="filter select select-bordered join-item w-30 bg-gray-700 text-white">
+              <select className="filter select select-bordered join-item w-30 bg-gray-800 text-white">
                 <option disabled selected className="text-gray-200 font-bold">
                   Select Docs
                 </option>
@@ -67,7 +67,7 @@ const Header = () => {
                 <option className="text-gray-200 font-bold">Ordinance</option>
               </select>
               <div className="indicator">
-                <button className="btn join-item bg-gray-700 hover:bg-gray-600 text-white border border-none rounded-tr-full rounded-br-full">
+                <button className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border border-none rounded-tr-full rounded-br-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
