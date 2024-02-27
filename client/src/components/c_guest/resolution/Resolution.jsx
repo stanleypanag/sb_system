@@ -78,7 +78,11 @@ const Resolution = () => {
                       <h3 className="text-lg font-bold text-gray-800">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-gray-500">{item.content}</p>
+                      <p className="mt-2 text-gray-500">
+                        {item.content.length > 100
+                          ? item.content.slice(0, 100) + "..." // Limit content to 100 characters
+                          : item.content}
+                      </p>
                       <a
                         className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
                         href="#"

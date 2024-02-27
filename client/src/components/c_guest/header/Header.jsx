@@ -30,9 +30,9 @@ const Header = () => {
                 class="inline-flex items-center gap-x-2 text-xl font-semibold"
                 to={"/"}
               >
-                <img class="w-10 h-auto" src={Logo} alt="Logo" />
-                <h1 className="tracking-widest uppercase text-xs text-gray-800">
-                  Bayan Ng Naic
+                <img class="w-[4rem] h-auto" src={Logo} alt="Logo" />
+                <h1 className="tracking-widest uppercase  font-semibold text-gray-800 text-xs">
+                  Naic Resolutions and Ordinances
                 </h1>
               </Link>
             </div>
@@ -50,7 +50,7 @@ const Header = () => {
           aria-label="Global"
         >
           <div class="flex items-center justify-between">
-            <div className="join">
+            <div className="join border border-gray-500 rounded-full border-2">
               <div>
                 <div>
                   <input
