@@ -7,7 +7,7 @@ const RecentDocs = () => {
     <>
       <div className="recent-docs pb-10">
         <h1 className="text-center pt-20 mb-10 text-lg text-gray-100 uppercase tracking-widest">
-          Recently Uploaded Documents
+          Recently Upload Documents
         </h1>
 
         {/* <!-- Card Blog --> */}

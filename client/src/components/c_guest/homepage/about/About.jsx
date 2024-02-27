@@ -51,7 +51,7 @@ const About = () => {
 
               <div class="mt-10 text-center">
                 <a
-                  class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 underline"
+                  class="bg-none border-4 border-gray-800 hover:bg-gray-800 hover:text-gray-200 text-gray-800 text-sm font-bold py-2 px-4 rounded-full"
                   href="https://maps.app.goo.gl/szvUz5Mc41PfCLzE7"
                 >
                   Locate on Google Maps

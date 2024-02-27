@@ -11,4 +11,8 @@
   .filter {
     max-width: 2rem;
   }
+
+  .brand-logo {
+    justify-content: center;
+  }
 }
