@@ -1,11 +1,6 @@
-.about{
-    background: #eae6e5;
-    
-}
-
 html {
-    scroll-behavior: smooth;
-  }
+  scroll-behavior: smooth;
+}
 
 /* .breakLine1{
     display: flex;
@@ -15,15 +10,15 @@ html {
     margin: auto;
 } */
 
-.about-title{
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
+.about-title {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.about-title h1{
-    font-size: larger;
-    font-weight: bold;
+.about-title h1 {
+  font-size: larger;
+  font-weight: bold;
 }
 
 /* .dot{
