@@ -8,9 +8,9 @@ const Resolution = () => {
   return (
     <>
       <main className="h-full">
-        <div className="resolution-content mt-20">
+        <div className="resolution-content pt-20">
           <div className="tracking-widest text-center text-gray-700 text-5xl">
-            <h1>Naic Resolutions</h1>
+            <h1>Resolutions</h1>
           </div>
 
           <label for="hs-trailing-button-add-on-with-icon" className="sr-only">

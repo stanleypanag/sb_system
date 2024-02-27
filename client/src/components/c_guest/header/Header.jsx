@@ -9,7 +9,7 @@ const Header = () => {
     <>
       {/* <!-- Announcement Banner --> */}
       <div class="bg-gray-800">
-        <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 mx-auto">
+        <div class="max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 mx-auto">
           {/* <!-- Grid --> */}
           <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
             <div class="text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
@@ -17,7 +17,7 @@ const Header = () => {
                 Want to download a copy?
               </p>
               <Link
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border-2 border-gray-300 text-gray-300 hover:border-blue-900 hover:text-blue-900 disabled:opacity-50 disabled:pointer-events-none"
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border-2 border-gray-300 text-gray-300 disabled:opacity-50 disabled:pointer-events-none"
                 to={"/register"}
               >
                 Sign up
@@ -31,8 +31,8 @@ const Header = () => {
                 to={"/"}
               >
                 <img class="w-[4rem] h-auto order-1" src={Logo} alt="Logo" />
-                <h1 className="tracking-wide uppercase font-bold text-gray-200 text-xl order-2">
-                  Naic Resolutions and Ordinances
+                <h1 className="tracking-widest uppercase font-bold text-gray-300 text-5xl order-2 font-poppins">
+                  Naic
                 </h1>
               </Link>
             </div>
@@ -44,9 +44,9 @@ const Header = () => {
       {/* <!-- End Announcement Banner --> */}
 
       {/* <!-- ========== HEADER ========== --> */}
-      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-700 text-sm sm:pb-0">
+      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-300 text-sm sm:pb-0">
         <nav
-          class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
+          class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-3"
           aria-label="Global"
         >
           <div class="flex items-center justify-between">
@@ -132,14 +132,14 @@ const Header = () => {
           >
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
               <Link
-                class="font-medium sm:py-6 text-white hover:text-gray-600"
+                class="sm:py-6 text-gray-800 hover:text-gray-600"
                 to={"/"}
                 aria-current="page"
               >
                 HOME
               </Link>
               <a
-                class="font-medium text-white hover:text-gray-500 sm:py-6"
+                class="text-gray-800 hover:text-gray-500 sm:py-6"
                 href="/#about"
               >
                 ABOUT
@@ -148,7 +148,7 @@ const Header = () => {
               <div class="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:click] sm:py-4">
                 <button
                   type="button"
-                  class="flex items-center text-white hover:text-gray-500 font-medium"
+                  class="flex items-center text-gray-800 hover:text-gray-500"
                 >
                   SEE DOCUMENTS
                   <svg
