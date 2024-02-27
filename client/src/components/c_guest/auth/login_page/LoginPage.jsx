@@ -1,23 +1,23 @@
-import React from 'react'
-import { Link } from "react-router-dom";
-import './login.css'
+import React from "react";
+import {Link} from "react-router-dom";
+import "./login.css";
 
 const LoginPage = () => {
   return (
     <>
       <html class="h-full">
-        <body class="bg-white flex h-full items-center pb-20 pt-15">
+        <body class="bg-white flex h-full items-center pb-5 pt-20">
           <main class="w-full max-w-md mx-auto p-6">
-            <div class="mt-7 bg-white border border-red-800 rounded-xl shadow-sm">
+            <div class="mt-7 bg-white border border-gray-800 rounded-xl shadow-sm">
               <div class="p-4 sm:p-7">
                 <div class="text-center">
-                  <h1 class="block text-5xl font-bold text-red-800">
+                  <h1 class="block text-5xl font-bold text-gray-800">
                     Sign in
                   </h1>
                   <p class="mt-2 text-sm text-gray-600">
                     Don't have an account yet? <br></br>
                     <Link
-                      class="text-red-600 decoration-2 hover:underline font-medium"
+                      class="text-gray-600 decoration-2 hover:underline font-medium"
                       to="/register"
                     >
                       Sign up here
@@ -28,7 +28,7 @@ const LoginPage = () => {
                 <div class="mt-5">
                   <button
                     type="button"
-                    class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-red-800 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-800 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     <svg
                       class="w-4 h-auto"
@@ -66,10 +66,7 @@ const LoginPage = () => {
                     <div class="grid gap-y-4">
                       {/* <!-- Form Group --> */}
                       <div>
-                        <label
-                          for="email"
-                          class="block text-sm mb-2"
-                        >
+                        <label for="email" class="block text-sm mb-2">
                           Email address
                         </label>
                         <div class="relative">
@@ -78,12 +75,12 @@ const LoginPage = () => {
                             id="email"
                             name="email"
                             class="searchbox py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                            required
+                            requigray
                             aria-describedby="email-error"
                           />
                           <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
-                              class="h-5 w-5 text-red-500"
+                              class="h-5 w-5 text-gray-500"
                               width="16"
                               height="16"
                               fill="currentColor"
@@ -95,7 +92,7 @@ const LoginPage = () => {
                           </div>
                         </div>
                         <p
-                          class="hidden text-xs text-red-600 mt-2"
+                          class="hidden text-xs text-gray-600 mt-2"
                           id="email-error"
                         >
                           Please include a valid email address so we can get
@@ -107,16 +104,13 @@ const LoginPage = () => {
                       {/* <!-- Form Group --> */}
                       <div>
                         <div class="flex justify-between items-center">
-                          <label
-                            for="password"
-                            class="block text-sm mb-2"
-                          >
+                          <label for="password" class="block text-sm mb-2">
                             Password
                           </label>
                           <div class="text-center">
                             <button
                               type="button"
-                              class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold text-red-500 disabled:opacity-50 disabled:pointer-events-none"
+                              class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-500 disabled:opacity-50 disabled:pointer-events-none"
                               data-hs-overlay="#hs-sign-out-alert"
                             >
                               Forgot Password?
@@ -164,9 +158,9 @@ const LoginPage = () => {
                                           </h2>
 
                                           <p className="text-gray-500 text-sm">
-                                            We will send you an email to change your password
+                                            We will send you an email to change
+                                            your password
                                           </p>
-
                                         </div>
 
                                         <div class="mt-5">
@@ -187,12 +181,12 @@ const LoginPage = () => {
                                                     id="email"
                                                     name="email"
                                                     class="searchbox py-3 px-4 block w-full border border-gray-900 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                                                    required
+                                                    requigray
                                                     aria-describedby="email-error"
                                                   />
                                                   <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                                     <svg
-                                                      class="h-5 w-5 text-red-500"
+                                                      class="h-5 w-5 text-gray-500"
                                                       width="16"
                                                       height="16"
                                                       fill="currentColor"
@@ -204,7 +198,7 @@ const LoginPage = () => {
                                                   </div>
                                                 </div>
                                                 <p
-                                                  class="hidden text-xs text-red-600 mt-2"
+                                                  class="hidden text-xs text-gray-600 mt-2"
                                                   id="email-error"
                                                 >
                                                   Please include a valid email
@@ -216,7 +210,7 @@ const LoginPage = () => {
 
                                               <button
                                                 type="submit"
-                                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
+                                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-600 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
                                               >
                                                 Reset password
                                               </button>
@@ -238,12 +232,12 @@ const LoginPage = () => {
                             id="password"
                             name="password"
                             class="searchbox py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                            required
+                            requigray
                             aria-describedby="password-error"
                           />
                           <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
-                              class="h-5 w-5 text-red-500"
+                              class="h-5 w-5 text-gray-500"
                               width="16"
                               height="16"
                               fill="currentColor"
@@ -255,10 +249,10 @@ const LoginPage = () => {
                           </div>
                         </div>
                         <p
-                          class="hidden text-xs text-red-600 mt-2"
+                          class="hidden text-xs text-gray-600 mt-2"
                           id="password-error"
                         >
-                          8+ characters required
+                          8+ characters requigray
                         </p>
                       </div>
                       {/* <!-- End Form Group --> */}
@@ -274,10 +268,7 @@ const LoginPage = () => {
                           />
                         </div>
                         <div class="ms-3">
-                          <label
-                            for="remember-me"
-                            class="text-sm"
-                          >
+                          <label for="remember-me" class="text-sm">
                             Remember me
                           </label>
                         </div>
@@ -286,7 +277,7 @@ const LoginPage = () => {
 
                       <button
                         type="submit"
-                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
+                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-600 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
                       >
                         Sign in
                       </button>
@@ -300,7 +291,7 @@ const LoginPage = () => {
         </body>
       </html>
     </>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

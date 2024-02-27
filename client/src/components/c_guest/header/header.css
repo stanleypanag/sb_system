@@ -1,0 +1,14 @@
+@media (max-width: 640px) {
+  .brand-logo {
+    justify-content: center;
+  }
+}
+@media (max-width: 880px) {
+  .search {
+    max-width: 140px;
+  }
+
+  .filter {
+    max-width: 2rem;
+  }
+}
