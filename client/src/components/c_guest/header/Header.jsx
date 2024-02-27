@@ -44,7 +44,7 @@ const Header = () => {
       {/* <!-- End Announcement Banner --> */}
 
       {/* <!-- ========== HEADER ========== --> */}
-      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-800 border-b border-gray-200 text-sm sm:pb-0">
+      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-800 text-sm sm:pb-0">
         <nav
           class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
           aria-label="Global"
@@ -54,8 +54,8 @@ const Header = () => {
               <div>
                 <div>
                   <input
-                    className="search input w-[20rem] input-bordered join-item rounded-tl-full rounded-bl-full"
-                    placeholder="Search Docs"
+                    className="search input w-[20rem] input-bordered join-item rounded-tl-full rounded-bl-full bg-gray-200"
+                    placeholder=""
                   />
                 </div>
               </div>
