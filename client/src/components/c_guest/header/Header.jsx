@@ -145,7 +145,7 @@ const Header = () => {
                 ABOUT
               </a>
 
-              <div class="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
+              <div class="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:click] sm:py-4">
                 <button
                   type="button"
                   class="flex items-center text-white hover:text-gray-500 font-medium"

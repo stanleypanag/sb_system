@@ -158,7 +158,7 @@ const RecentDocs = () => {
         </div>
         {/* <!-- End Card Blog --> */}
 
-        <div class="hs-dropdown relative inline-flex mx-auto text-center [--trigger:hover] mt-10">
+        <div class="hs-dropdown relative inline-flex mx-auto text-center [--trigger:click] mt-10">
           <button
             id="hs-dropdown-hover-event"
             type="button"
