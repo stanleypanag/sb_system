@@ -1,8 +1,15 @@
-@media (max-width: 640px) {
-  .brand-logo {
-    justify-content: center;
+@media (min-width: 770px) {
+  .link-text {
+    display: none;
   }
 }
+
+@media (max-width: 770px) {
+  .svg {
+    display: none;
+  }
+}
+
 @media (max-width: 880px) {
   .search {
     max-width: 140px;
@@ -11,8 +18,11 @@
   .filter {
     max-width: 2rem;
   }
-
   .brand-logo {
     justify-content: center;
+  }
+
+  .auth-link {
+    margin-top: 10px;
   }
 }
