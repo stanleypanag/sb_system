@@ -5,7 +5,7 @@ const RegisterPage = () => {
   return (
     <>
       <html class="h-full">
-        <body class="bg-white flex h-full items-center pb-10 pt-20">
+        <body class="bg-gray-300 flex h-full items-center pb-10 pt-20">
           <main class="w-full max-w-md mx-auto p-6">
             <div class="mt-7 bg-gray-800 border border-gray-800 rounded-xl shadow-sm">
               <div class="p-4 sm:p-7">
@@ -213,7 +213,7 @@ const RegisterPage = () => {
 
                       <button
                         type="submit"
-                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-500 text-gray-200 hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
+                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-700 text-gray-200 hover:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none"
                       >
                         Sign up
                       </button>

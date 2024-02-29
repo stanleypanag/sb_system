@@ -73,7 +73,7 @@ const Header = () => {
                 <div>
                   <input
                     className="search input w-[17rem] input-bordered join-item rounded-tl-full rounded-bl-full bg-gray-200"
-                    placeholder=""
+                    placeholder="eg.,year, title, reso no., ord. no."
                   />
                 </div>
               </div>

@@ -25,6 +25,9 @@
   .brand-logo {
     justify-content: center;
   }
+  .brand-logo h1 {
+    font-size: 0.5em;
+  }
 
   .auth-link {
     margin-top: 10px;
