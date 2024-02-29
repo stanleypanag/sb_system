@@ -162,7 +162,7 @@ const RecentDocs = () => {
           <button
             id="hs-dropdown-hover-event"
             type="button"
-            class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-tr-full rounded-br-full border border-gray-800 bg-white text-gray-800 shadow-sm disabled:opacity-50 disabled:pointer-events-none"
+            class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-tr-full rounded-br-full border border-gray-200 border-l-0 bg-gray-200 text-gray-800 shadow-sm disabled:opacity-50 disabled:pointer-events-none"
           >
             See more Documents
             <svg
