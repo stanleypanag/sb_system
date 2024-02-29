@@ -6,7 +6,7 @@ const RecentDocs = () => {
   return (
     <>
       <div className="recent-docs pb-10">
-        <h1 className="text-center pt-20 mb-10 text-lg text-gray-200 uppercase tracking-widest">
+        <h1 className="text-center pt-20 mb-10 text-2xl text-gray-200 uppercase tracking-widest">
           Recently Upload Documents
         </h1>
 

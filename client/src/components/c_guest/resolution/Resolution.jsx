@@ -8,7 +8,7 @@ const Resolution = () => {
 
   return (
     <>
-      <main className="h-full">
+      <main className="h-full bg-gray-300">
         <div className="resolution-content pt-20">
           <div className="tracking-widest text-center text-gray-700 text-5xl">
             <h1>Resolutions</h1>
