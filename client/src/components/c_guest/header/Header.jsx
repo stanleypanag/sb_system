@@ -1,16 +1,24 @@
 import React from "react";
+import {Link, useNavigate} from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import "./header.css";
 
-import {Link} from "react-router-dom";
-
 const Header = () => {
+  const navigate = useNavigate();
+
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
       aboutSection.scrollIntoView({behavior: "smooth"});
     }
   };
+
+  const handleAboutClick = (e) => {
+    e.preventDefault();
+    navigate("/");
+    setTimeout(scrollToAbout, 100);
+  };
+
   return (
     <>
       {/* <!-- Announcement Banner --> */}
@@ -153,7 +161,7 @@ const Header = () => {
             class="order-2 hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
           >
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
-              <Link to={"/"} onClick={() => window.scrollTo(0, 0)}>
+              <Link to={"/"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
@@ -168,7 +176,7 @@ const Header = () => {
                 </svg>
                 <p className="link-text text-center">Home</p>
               </Link>
-              <Link to={"/#about"} onClick={scrollToAbout}>
+              <Link to={"/#about"} onClick={handleAboutClick}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
