@@ -5,6 +5,12 @@ import "./header.css";
 import {Link} from "react-router-dom";
 
 const Header = () => {
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById("about");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({behavior: "smooth"});
+    }
+  };
   return (
     <>
       {/* <!-- Announcement Banner --> */}
@@ -13,13 +19,13 @@ const Header = () => {
           {/* <!-- Grid --> */}
           <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
             <div class="gap-2 text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
-              <p class="inline-block text-xs font-semibold text-gray-400">
+              <p class="inline-block text-xs text-gray-400">
                 Want to download a copy?
               </p>
 
               <div className="auth-link flex justify-center items-center">
                 <Link
-                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border-2 border-gray-400 bg-gray-800 text-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-800 text-gray-400 disabled:opacity-50 disabled:pointer-events-none"
                   to={"/login"}
                 >
                   sign in
@@ -28,7 +34,7 @@ const Header = () => {
                   or
                 </div>
                 <Link
-                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border-2 border-gray-400 bg-gray-800 text-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-800 text-gray-400 disabled:opacity-50 disabled:pointer-events-none"
                   to={"/register"}
                 >
                   sign up
@@ -43,7 +49,7 @@ const Header = () => {
                 to={"/"}
               >
                 <img class="w-[3rem] h-auto order-1" src={Logo} alt="Logo" />
-                <h1 className="tracking-widest uppercase font-bold text-gray-400 text-sm order-2 font-poppins">
+                <h1 className="tracking-widest uppercase font-bold text-gray-200 text-sm order-2 font-poppins">
                   Naic Cavite Resolutions and Ordinances
                 </h1>
               </Link>
@@ -147,13 +153,13 @@ const Header = () => {
             class="order-2 hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
           >
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
-              <Link to={"/"}>
+              <Link to={"/"} onClick={() => window.scrollTo(0, 0)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="50"
-                  height="50"
+                  width="30"
+                  height="30"
                   fill=""
                   viewBox="0 0 24 24"
                   className="svg"
@@ -162,13 +168,13 @@ const Header = () => {
                 </svg>
                 <p className="link-text text-center">Home</p>
               </Link>
-              <a href={"/#about"}>
+              <Link to={"/#about"} onClick={scrollToAbout}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="50"
-                  height="50"
+                  width="30"
+                  height="30"
                   fill=""
                   className="svg"
                   viewBox="0 0 50 50"
@@ -176,7 +182,7 @@ const Header = () => {
                   <path d="M25,2C12.297,2,2,12.297,2,25s10.297,23,23,23s23-10.297,23-23S37.703,2,25,2z M25,11c1.657,0,3,1.343,3,3s-1.343,3-3,3 s-3-1.343-3-3S23.343,11,25,11z M29,38h-2h-4h-2v-2h2V23h-2v-2h2h4v2v13h2V38z"></path>
                 </svg>
                 <p className="link-text text-center">About</p>
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
