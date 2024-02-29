@@ -1,3 +1,7 @@
+.svg {
+  fill: #ffffff;
+}
+
 @media (min-width: 770px) {
   .link-text {
     display: none;
