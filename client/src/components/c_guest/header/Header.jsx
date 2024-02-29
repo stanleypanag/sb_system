@@ -24,7 +24,7 @@ const Header = () => {
                 >
                   sign in
                 </Link>
-                <div className="divider divider-horizontal font-bold text-xs text-gray-200 mx-2">
+                <div className="divider divider-horizontal font-bold text-xs text-gray-400 mx-2">
                   or
                 </div>
                 <Link
@@ -43,8 +43,8 @@ const Header = () => {
                 to={"/"}
               >
                 <img class="w-[3rem] h-auto order-1" src={Logo} alt="Logo" />
-                <h1 className="tracking-widest uppercase font-bold text-gray-200 text-sm order-2 font-poppins">
-                  Resolutions and Ordinances
+                <h1 className="tracking-widest uppercase font-bold text-gray-400 text-sm order-2 font-poppins">
+                  Naic Cavite Resolutions and Ordinances
                 </h1>
               </Link>
             </div>
@@ -152,9 +152,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="30"
-                  height="30"
-                  fill="white"
+                  width="50"
+                  height="50"
+                  fill=""
                   viewBox="0 0 24 24"
                   className="svg"
                 >
@@ -167,9 +167,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="30"
-                  height="30"
-                  fill="white"
+                  width="50"
+                  height="50"
+                  fill=""
                   className="svg"
                   viewBox="0 0 50 50"
                 >
