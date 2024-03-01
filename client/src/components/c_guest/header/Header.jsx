@@ -33,16 +33,16 @@ const Header = () => {
 
               <div className="auth-link flex justify-center items-center">
                 <Link
-                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-800 text-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-100 text-gray-900 disabled:opacity-50 disabled:pointer-events-none"
                   to={"/login"}
                 >
                   sign in
                 </Link>
-                <div className="divider divider-horizontal font-bold text-xs text-gray-400 mx-2">
+                <div className="divider divider-horizontal font-bold text-xs text-gray-100 mx-2">
                   or
                 </div>
                 <Link
-                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-800 text-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-100 text-gray-900 disabled:opacity-50 disabled:pointer-events-none"
                   to={"/register"}
                 >
                   sign up
@@ -57,7 +57,7 @@ const Header = () => {
                 to={"/"}
               >
                 <img class="w-[3rem] h-auto order-1" src={Logo} alt="Logo" />
-                <h1 className="tracking-widest uppercase font-bold text-gray-200 text-sm order-2 font-poppins">
+                <h1 className="tracking-widest uppercase font-bold text-gray-100 text-xs order-2 font-poppins">
                   Naic Cavite Resolutions and Ordinances
                 </h1>
               </Link>
@@ -76,19 +76,19 @@ const Header = () => {
           aria-label="Global"
         >
           <div class="order-1 flex items-center justify-between">
-            <div className="join border border-gray-400 rounded-full border-2">
+            <div className="join border-2 border-gray-800">
               <div>
                 <div>
                   <input
-                    className="search input w-[17rem] input-bordered join-item rounded-tl-full rounded-bl-full bg-gray-200"
+                    className="search input w-[17rem] join-item bg-gray-200"
                     placeholder="eg.,year, title, reso no., ord. no."
                   />
                 </div>
               </div>
-              <select className="filter select select-bordered join-item w-30 bg-gray-800 text-white">
+              <select className="select join-item w-25 bg-gray-800 text-white focus:outline-none">
                 <option
                   disabled
-                  className="text-white font-bold dark:text-white uppercase"
+                  className="text-white font-bold dark:text-white"
                 >
                   Select Docs
                 </option>
@@ -96,7 +96,7 @@ const Header = () => {
                 <option className="text-gray-200">Ordinance</option>
               </select>
               <div className="indicator">
-                <button className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border border-none rounded-tr-full rounded-br-full">
+                <button className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border border-none">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -162,34 +162,27 @@ const Header = () => {
           >
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
               <Link to={"/"}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="30"
-                  height="30"
-                  fill=""
-                  viewBox="0 0 24 24"
-                  className="svg"
-                >
-                  <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 14 L 14 14 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"></path>
-                </svg>
-                <p className="link-text text-center">Home</p>
+                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                  Home
+                </p>
               </Link>
+
               <Link to={"/#about"} onClick={handleAboutClick}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="30"
-                  height="30"
-                  fill=""
-                  className="svg"
-                  viewBox="0 0 50 50"
-                >
-                  <path d="M25,2C12.297,2,2,12.297,2,25s10.297,23,23,23s23-10.297,23-23S37.703,2,25,2z M25,11c1.657,0,3,1.343,3,3s-1.343,3-3,3 s-3-1.343-3-3S23.343,11,25,11z M29,38h-2h-4h-2v-2h2V23h-2v-2h2h4v2v13h2V38z"></path>
-                </svg>
-                <p className="link-text text-center">About</p>
+                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                  About
+                </p>
+              </Link>
+
+              <Link to={"/resolution"}>
+                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                  Resolutions
+                </p>
+              </Link>
+
+              <Link to={"/ordinance"}>
+                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                  Ordinances
+                </p>
               </Link>
             </div>
           </div>

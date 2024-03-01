@@ -1,22 +1,16 @@
-.svg {
-  fill: #ffffff;
-}
-
 @media (min-width: 770px) {
-  .link-text {
-    display: none;
-  }
 }
 
 @media (max-width: 770px) {
-  .svg {
-    display: none;
-  }
 }
 
 @media (max-width: 880px) {
+  .select {
+    width: 30px;
+  }
+
   .search {
-    max-width: 140px;
+    max-width: 160px;
   }
 
   .filter {
@@ -32,4 +26,9 @@
   .auth-link {
     margin-top: 10px;
   }
+}
+
+.link-text {
+  text-transform: uppercase;
+  font-weight: bold;
 }
