@@ -1,0 +1,40 @@
+@media (min-width: 680px) {
+  .user-profile-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .user-profile {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .select {
+    width: 30px;
+  }
+
+  .search {
+    max-width: 160px;
+  }
+
+  .filter {
+    max-width: 2rem;
+  }
+  .brand-logo {
+    justify-content: center;
+  }
+  .brand-logo h1 {
+    font-size: 0.5em;
+  }
+
+  .auth-link {
+    margin-top: 10px;
+  }
+}
+
+.link-text {
+  text-transform: uppercase;
+  font-weight: bold;
+}
