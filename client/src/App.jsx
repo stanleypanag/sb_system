@@ -1,5 +1,5 @@
 // imports from guest loader
-import {Guest} from "./loader";
+import {Guest, Regular} from "./loader";
 
 import Footer from "./components/reusable/footer/Footer";
 
@@ -7,13 +7,15 @@ const App = () => {
   return (
     <>
       <div className="dark:bg-white">
-        <div>
+        {/* <div>
           <Guest />
+        </div> */}
+
+        <div>
+          <Regular />
         </div>
-        {/*
-        <div><Regular/></div>
-        <div><Admin/></div> 
-        */}
+
+        {/* <div><Admin/></div>  */}
       </div>
 
       <div>
