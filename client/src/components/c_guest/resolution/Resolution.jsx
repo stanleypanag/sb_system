@@ -24,7 +24,7 @@ const Resolution = () => {
               placeholder="search by ff... [resolution number, title, year]"
               id="hs-trailing-button-add-on-with-icon"
               name="hs-trailing-button-add-on-with-icon"
-              className="py-3 px-4 block w-full border-2 border-gray-900 rounded-full text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-gray-700 dark:text-black"
+              className="py-3 px-4 block w-full border-2 border-gray-900 text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-gray-700 dark:text-black"
             />
           </div>
 

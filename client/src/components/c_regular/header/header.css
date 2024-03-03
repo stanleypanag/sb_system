@@ -1,12 +1,14 @@
-@media (min-width: 680px) {
-  .user-profile-nav {
-    display: none;
-  }
+.user-profile {
+  display: flex;
+  justify-content: center;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 630px) {
   .user-profile {
     display: none;
+  }
+  .user-profile-nav {
+    display: block;
   }
 }
 

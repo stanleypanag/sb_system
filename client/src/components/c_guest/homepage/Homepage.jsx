@@ -10,7 +10,7 @@ const Homepage = () => {
       {/* <Cover /> */}
       <RecentDocs />
 
-      <section className="about pb-20 bg-gray-300" id="about">
+      <section className="about bg-gray-300" id="about">
         <div className="about-title mb-10">
           <h2 className="font-bold text-5xl text-gray-800 pt-20 tracking-widest">
             ABOUT

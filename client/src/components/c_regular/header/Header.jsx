@@ -1,6 +1,6 @@
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
 import "./header.css";
+import {Link, useNavigate} from "react-router-dom";
 import Logo from "../../assets/logo.png";
 
 const Header = () => {
@@ -26,9 +26,15 @@ const Header = () => {
           {/* <!-- Grid --> */}
           <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
             <div class="gap-2 text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
-              <div className="user-profile flex flex-row items-center gap-4">
+              <div className="user-profile items-center gap-4 border-2 border-gray-200 py-1 bg-gray-200 rounded-full px-5">
                 <div>
-                  <h1>Welcome User Stanley Panag!</h1>
+                  <h1 className="text-sm text-gray-900 flex flex-row gap-1 items-center">
+                    USER:
+                    <p className="font-bold text-xs text-gray-900">
+                      {" "}
+                      Stanley Panag!
+                    </p>
+                  </h1>
                 </div>
                 <div className="dropdown dropdown-end">
                   <div
@@ -39,7 +45,7 @@ const Header = () => {
                     <div className="w-10 rounded-full">
                       <svg
                         viewBox="0 0 24 24"
-                        fill="white"
+                        fill="gray"
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -54,7 +60,7 @@ const Header = () => {
                             fill-rule="evenodd"
                             clip-rule="evenodd"
                             d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 9C15 10.6569 13.6569 12 12 12C10.3431 12 9 10.6569 9 9C9 7.34315 10.3431 6 12 6C13.6569 6 15 7.34315 15 9ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z"
-                            fill="white"
+                            fill="black"
                           ></path>{" "}
                         </g>
                       </svg>
@@ -182,9 +188,12 @@ const Header = () => {
             class="order-2 hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
           >
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
-              <div className="user-profile-nav flex flex-row md:flex-col items-center justify-center gap-4">
+              <div className="user-profile-nav border border-white bg-gray-300 rounded-full text-gray-800 font-bold lg:hidden md:hidden  flex flex-row md:flex-col items-center justify-center gap-4">
                 <div>
-                  <h1>Welcome User Stanley Panag!</h1>
+                  <h1 className="flex flex-row gap-1">
+                    USER:
+                    <p className="text-gray-700 font-bold">Stanley Panag!</p>
+                  </h1>
                 </div>
                 <div className="dropdown dropdown-end">
                   <div
@@ -210,7 +219,7 @@ const Header = () => {
                             fill-rule="evenodd"
                             clip-rule="evenodd"
                             d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 9C15 10.6569 13.6569 12 12 12C10.3431 12 9 10.6569 9 9C9 7.34315 10.3431 6 12 6C13.6569 6 15 7.34315 15 9ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z"
-                            fill="white"
+                            fill="black"
                           ></path>{" "}
                         </g>
                       </svg>
@@ -221,7 +230,7 @@ const Header = () => {
                     className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <a>Logout</a>
+                      <a className="text-gray-200 text-xs">Logout</a>
                     </li>
                   </ul>
                 </div>
