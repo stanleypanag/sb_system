@@ -5,143 +5,84 @@ import "./footer.css";
 const Footer = () => {
   return (
     <>
-      <footer class="bg-gray-900 w-full">
-        <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
-          {/* <!-- Grid --> */}
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            <div class="col-span-full lg:col-span-1">
-              <a
-                class="flex justify-center items-center text-xl font-semibold text-white"
-                href="#"
-                aria-label="Brand"
-              >
-                <img className="w-10" src={logo} />
-                <p className="ml-3">SB Naic Office</p>
-              </a>
-            </div>
-            {/* <!-- End Col --> */}
-
-            <div class="col-span-1">
-              <h4 class="font-semibold text-gray-100">Documents</h4>
-
-              <div class="mt-3 grid space-y-3">
-                <p>
+      <footer className="px-4 divide-y bg-gray-900">
+        <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+          <div className="lg:w-1/3">
+            <a
+              rel="noopener noreferrer"
+              href="#"
+              className="flex justify-center space-x-3 lg:justify-start"
+            >
+              <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-400">
+                <img src={logo} />
+              </div>
+              <span className="self-center text-xl font-semibold">
+                SB Naic Office
+              </span>
+            </a>
+          </div>
+          <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-3">
+            <div className="space-y-3">
+              <h3 className="tracki uppercase dark:text-gray-50">Documents</h3>
+              <ul className="space-y-1">
+                <li>
                   <a
-                    class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    className="text-gray-500"
+                    rel="noopener noreferrer"
                     href="#"
                   >
                     Resolutions
                   </a>
-                </p>
-                <p>
+                </li>
+                <li>
                   <a
-                    class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
+                    className="text-gray-500"
+                    rel="noopener noreferrer"
                     href="#"
                   >
                     Ordinances
                   </a>
-                </p>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-3">
+              <h3 className="tracki uppercase dark:text-gray-50">Agency</h3>
+              <ul className="space-y-1">
+                <li>
+                  <a
+                    className="text-gray-500"
+                    rel="noopener noreferrer"
+                    href="#"
+                  >
+                    Sangguniang Bayan
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-3">
+              <div className="uppercase dark:text-gray-50">Social media</div>
+              <div className="flex justify-start space-x-3">
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  title="Facebook"
+                  className="flex items-center p-1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 32 32"
+                    className="w-5 h-5 fill-current"
+                  >
+                    <path d="M32 16c0-8.839-7.167-16-16-16-8.839 0-16 7.161-16 16 0 7.984 5.849 14.604 13.5 15.803v-11.177h-4.063v-4.625h4.063v-3.527c0-4.009 2.385-6.223 6.041-6.223 1.751 0 3.584 0.312 3.584 0.312v3.937h-2.021c-1.984 0-2.604 1.235-2.604 2.5v3h4.437l-0.713 4.625h-3.724v11.177c7.645-1.199 13.5-7.819 13.5-15.803z"></path>
+                  </svg>
+                </a>
               </div>
             </div>
-            {/* <!-- End Col --> */}
-
-            <div class="col-span-1">
-              <h4 class="font-semibold text-gray-100">Learn More</h4>
-
-              <div class="mt-3 grid space-y-3">
-                <p>
-                  <a
-                    class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="#"
-                  >
-                    Wikipedia
-                  </a>
-                </p>
-                <p>
-                  <a
-                    class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                    href="#"
-                  >
-                    Facebook
-                  </a>
-                </p>
-              </div>
-            </div>
-            {/* <!-- End Col --> */}
-
-            <div class="col-span-2">
-              <h4 class="font-semibold text-gray-100">Sent Us your Feedback</h4>
-
-              <form>
-                <div class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-gray-500 rounded-lg p-2">
-                  <div class="w-full">
-                    <label for="hero-input" class="sr-only">
-                      Send Feedback
-                    </label>
-                    <input
-                      type="text"
-                      id="hero-input"
-                      name="hero-input"
-                      class="py-3 px-4 block w-full border-transparent rounded-lg text-sm disabled:opacity-50 disabled:pointer-events-none"
-                      placeholder="Enter your message"
-                    />
-                  </div>
-                  <a
-                    class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
-                  >
-                    Send
-                  </a>
-                </div>
-              </form>
-            </div>
-            {/* <!-- End Col --> */}
           </div>
-          {/* <!-- End Grid --> */}
-
-          <div class="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
-            <div class="flex justify-between items-center">
-              <p class="text-sm text-gray-400">
-                © 2024 Sangguniang Bayan ng Naic. All rights reserved.
-              </p>
-            </div>
-            {/* <!-- End Col --> */}
-
-            {/* <!-- Social Brands --> */}
-            <div>
-              <a
-                class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-                href="https://www.facebook.com/municipalityofnaic"
-              >
-                <svg
-                  class="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                </svg>
-              </a>
-              <a
-                class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-                href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSDbttwKFrXJcRHWHnXkDxWCrZcnlMCpmVzvlmTWXRsMJvDDzlGskBpptLbxfkjKfBtSTKDs"
-              >
-                <svg
-                  class="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
-                </svg>
-              </a>
-            </div>
-            {/* <!-- End Social Brands --> */}
-          </div>
+        </div>
+        <div className="py-6 text-sm text-center dark:text-gray-400">
+          © 2024 Sangguniang Bayan ng Naic. All rights reserved.
         </div>
       </footer>
     </>
