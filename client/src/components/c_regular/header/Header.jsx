@@ -123,7 +123,7 @@ const Header = () => {
                 <option className="text-gray-200">Ordinance</option>
               </select>
               <div className="indicator">
-                <button className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border border-none">
+                <button className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border-0">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"

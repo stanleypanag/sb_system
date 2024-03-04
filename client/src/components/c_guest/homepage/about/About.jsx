@@ -105,7 +105,7 @@ const About = () => {
       </div>
       {/* <!-- End About--> */}
 
-      <div className="bg-gray-800 grid grid-cols-1 gap-20 px-8 py-16 mx-auto md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 pb-20">
+      <div className="bg-black grid grid-cols-1 gap-20 px-8 py-16 mx-auto md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 pb-20">
         <div className="flex flex-col justify-between items-center text-center">
           <div className="space-y-2">
             <h2 className="text-4xl font-bold leadi lg:text-5xl">
@@ -117,7 +117,7 @@ const About = () => {
             </div>
           </div>
           <svg
-            className="w-[13rem] mt-5"
+            className="w-[10rem]"
             viewBox="-2.4 -2.4 28.80 28.80"
             xmlns="http://www.w3.org/2000/svg"
             fill="#e6e6e6"
@@ -170,7 +170,7 @@ const About = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-900"
+            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-800"
           >
             Send Message
           </button>
