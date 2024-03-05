@@ -26,13 +26,12 @@ const Header = () => {
           {/* <!-- Grid --> */}
           <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
             <div class="gap-2 text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
-              <div className="user-profile items-center gap-4 border-2 border-gray-200 py-1 bg-gray-200 rounded-full px-5">
+              <div className="user-profile items-center gap-4 border-2 border-gray-200 bg-gray-200 rounded-full px-5">
                 <div>
                   <h1 className="text-sm text-gray-900 flex flex-row gap-1 items-center">
                     USER:
                     <p className="font-bold text-xs text-gray-900">
-                      {" "}
-                      Stanley Panag!
+                      Stanley Panag
                     </p>
                   </h1>
                 </div>
@@ -192,7 +191,7 @@ const Header = () => {
                 <div>
                   <h1 className="flex flex-row gap-1">
                     USER:
-                    <p className="text-gray-700 font-bold">Stanley Panag!</p>
+                    <p className="text-gray-700 font-bold">Stanley Panag</p>
                   </h1>
                 </div>
                 <div className="dropdown dropdown-end">

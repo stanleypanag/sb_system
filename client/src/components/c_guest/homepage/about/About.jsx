@@ -105,13 +105,13 @@ const About = () => {
       </div>
       {/* <!-- End About--> */}
 
-      <div className="bg-black grid grid-cols-1 gap-20 px-8 py-16 mx-auto md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 pb-20">
+      <div className="bg-gray-700 grid grid-cols-1 gap-20 px-8 py-16 mx-auto md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 pb-20">
         <div className="flex flex-col justify-between items-center text-center">
           <div className="space-y-2">
-            <h2 className="text-4xl font-bold leadi lg:text-5xl">
+            <h2 className="text-4xl text-white font-bold leadi lg:text-5xl">
               Your Feedback matters to us!
             </h2>
-            <div className="text-gray-500">
+            <div className="text-gray-400">
               please send us your sincere concerns for the future improvemets of
               this website, thank you.
             </div>
@@ -170,7 +170,7 @@ const About = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-800"
+            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-900"
           >
             Send Message
           </button>
