@@ -7,13 +7,13 @@ const App = () => {
   return (
     <>
       <div className="dark:bg-white">
-        {/* <div>
-          <Guest />
-        </div> */}
-
         <div>
-          <Regular />
+          <Guest />
         </div>
+
+        {/* <div>
+          <Regular />
+        </div> */}
 
         {/* <div><Admin/></div>  */}
       </div>
