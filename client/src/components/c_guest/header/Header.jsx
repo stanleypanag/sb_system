@@ -27,7 +27,7 @@ const Header = () => {
           {/* <!-- Grid --> */}
           <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
             <div class="gap-2 text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
-              <p class="inline-block text-xs text-gray-400">
+              <p class="inline-block text-xs text-gray-300">
                 Want to download a copy?
               </p>
 
@@ -38,7 +38,7 @@ const Header = () => {
                 >
                   sign in
                 </Link>
-                <div className="divider divider-horizontal font-bold text-xs text-gray-100 mx-2">
+                <div className="divider divider-horizontal font-bold text-xs text-gray-200 mx-2">
                   or
                 </div>
                 <Link
@@ -57,7 +57,7 @@ const Header = () => {
                 to={"/"}
               >
                 <img class="w-[3rem] h-auto order-1" src={Logo} alt="Logo" />
-                <h1 className="tracking-widest uppercase font-bold text-gray-100 text-xs order-2 font-poppins">
+                <h1 className="tracking-widest uppercase font-bold text-gray-200 text-xs order-2 font-poppins">
                   Naic Cavite Resolutions and Ordinances
                 </h1>
               </Link>
@@ -70,13 +70,13 @@ const Header = () => {
       {/* <!-- End Announcement Banner --> */}
 
       {/* <!-- ========== HEADER ========== --> */}
-      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-700 text-sm sm:pb-0">
+      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-900 bg-opacity-25 text-sm sm:pb-0 absolute">
         <nav
           class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
           aria-label="Global"
         >
           <div class="order-1 flex items-center justify-between">
-            <div className="join border-2 border-gray-800">
+            <div className="join border-2 border-gray-900">
               <div>
                 <div>
                   <input
@@ -101,7 +101,7 @@ const Header = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
                     fill="currentColor"
-                    className="w-4 h-4 opacity-70"
+                    className="w-4 h-4 opacity-100"
                   >
                     <path
                       fillRule="evenodd"
@@ -162,25 +162,25 @@ const Header = () => {
           >
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
               <Link to={"/"}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Home
                 </p>
               </Link>
 
               <Link to={"/#about"} onClick={handleAboutClick}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   About
                 </p>
               </Link>
 
               <Link to={"/resolution"}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Resolutions
                 </p>
               </Link>
 
               <Link to={"/ordinance"}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Ordinances
                 </p>
               </Link>

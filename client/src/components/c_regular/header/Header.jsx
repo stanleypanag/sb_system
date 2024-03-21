@@ -96,7 +96,7 @@ const Header = () => {
       </div>
 
       {/* <!-- ========== HEADER ========== --> */}
-      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-700 text-sm sm:pb-0">
+      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-900 bg-opacity-50 text-sm sm:pb-0 absolute">
         <nav
           class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
           aria-label="Global"
@@ -236,25 +236,25 @@ const Header = () => {
               </div>
 
               <Link to={"/"}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Home
                 </p>
               </Link>
 
               <Link to={"/#about"} onClick={handleAboutClick}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   About
                 </p>
               </Link>
 
               <Link to={"/resolution"}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Resolutions
                 </p>
               </Link>
 
               <Link to={"/ordinance"}>
-                <p className="link-text tracking-widest text-gray-300 text-xs text-center">
+                <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Ordinances
                 </p>
               </Link>
