@@ -8,9 +8,9 @@ const Resolution = () => {
 
   return (
     <>
-      <main className="h-full bg-gray-300">
+      <main className="h-full bg-gray-300 pt-20">
         <div className="resolution-content pt-20">
-          <div className="tracking-widest text-center text-gray-700 text-5xl">
+          <div className="tracking-widest text-center text-gray-600 text-4xl uppercase">
             <h1>Resolutions</h1>
           </div>
 

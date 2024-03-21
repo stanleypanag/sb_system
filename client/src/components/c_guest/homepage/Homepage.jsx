@@ -12,7 +12,7 @@ const Homepage = () => {
 
       <section className="about bg-gray-300" id="about">
         <div className="about-title mb-10">
-          <h2 className="font-bold text-5xl text-gray-800 pt-20 tracking-widest">
+          <h2 className="font-bold text-5xl text-gray-800 pt-10 tracking-widest">
             ABOUT
           </h2>
         </div>

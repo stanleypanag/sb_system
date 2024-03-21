@@ -16,8 +16,8 @@ const RecentDocs = () => {
 
   return (
     <>
-      <div className="recent-docs pb-10">
-        <h1 className="text-center pt-20 mb-10 text-2xl text-gray-300 uppercase tracking-widest">
+      <div className="recent-docs pb-10 pt-20">
+        <h1 className="text-center pt-20 mb-10 text-2xl text-white uppercase tracking-widest">
           Recently Upload Documents
         </h1>
 
@@ -173,7 +173,7 @@ const RecentDocs = () => {
           <button
             id="hs-dropdown-hover-event"
             type="button"
-            className="hs-dropdown-toggle h-[3rem] py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-tr-full rounded-br-full border border-gray-200 border-l-0 bg-gray-200 text-gray-800 shadow-sm disabled:opacity-50 disabled:pointer-events-none"
+            className="hs-dropdown-toggle h-[3rem] py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-tr-full rounded-br-full border-3 border-gray-200 border-l-0 bg-gray-200 text-gray-800 shadow-sm disabled:opacity-50 disabled:pointer-events-none"
             onClick={toggleDropdown}
           >
             See more Documents
