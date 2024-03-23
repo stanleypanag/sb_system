@@ -1,31 +1,13 @@
-// imports from guest loader
-import {Guest, Regular} from "./loader";
-
 import Footer from "./components/reusable/footer/Footer";
+import {User, Admin} from "./loader/index";
 
 const App = () => {
   return (
     <>
-      <div className="dark:bg-white">
-        <div>
-          <Guest />
-        </div>
-
-        {/* <div>
-          <Regular />
-        </div> */}
-
-        {/* <div><Admin/></div>  */}
-      </div>
-
-      <div>
-        <Footer />
-      </div>
+      <User />
+      <Footer />
     </>
   );
 };
 
 export default App;
-
-// Logic:
-// App.jsx will contains logic of access control and authentication paths.
