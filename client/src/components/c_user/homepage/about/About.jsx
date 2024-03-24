@@ -10,24 +10,22 @@ const About = () => {
   return (
     <>
       {/* <!-- About --> */}
-      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-5 mx-auto">
+      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-5 mx-auto">
         {/* <!-- Grid --> */}
-        <div class="grid grid-row-3 sm:grid-row- lg:grid-cols-3 gap-6">
+        <div className="grid grid-row-3 sm:grid-row- lg:grid-cols-3 gap-6">
           {/* <!-- Card --> */}
-          <div class="flex flex-col bg-transparent">
-            <div class="flex-auto p-4 md:p-6">
+          <div className="flex flex-col bg-transparent">
+            <div className="flex-auto p-4 md:p-6">
               <h1 className="text-gray-800 text-center font-bold tracking-widest uppercase">
                 The Sangguniang Bayan ng Naic
               </h1>
 
-              <p class="mt-3 sm:mt-6 text-center text-gray-800 md:text-md tracking-wide">
-                <p>
-                  "The Sangguniang Bayan is the local legislative branch of the
-                  municipal governments in the Philippines. It is responsible
-                  for passing ordinances and resolutions for the administration
-                  of a municipality. Its powers are defined by the Local
-                  Government Code, passed by Congress in 1991."
-                </p>
+              <p className="mt-3 sm:mt-6 text-center text-gray-800 md:text-md tracking-wide">
+                "The Sangguniang Bayan is the local legislative branch of the
+                municipal governments in the Philippines. It is responsible for
+                passing ordinances and resolutions for the administration of a
+                municipality. Its powers are defined by the Local Government
+                Code, passed by Congress in 1991."
               </p>
             </div>
           </div>
@@ -36,23 +34,21 @@ const About = () => {
           <hr className="sm:block md:hidden border-gray-800"></hr>
 
           {/* <!-- Card --> */}
-          <div class="flex flex-col bg-transparent">
-            <div class="flex-auto p-4 md:p-6">
+          <div className="flex flex-col bg-transparent">
+            <div className="flex-auto p-4 md:p-6">
               <h1 className="font-bold text-gray-800 text-center tracking-widest uppercase">
                 Location
               </h1>
 
-              <p class="mt-3 sm:mt-6 text-center text-gray-800 md:text-md tracking-wide">
-                <p>
-                  " The Sangguniang Bayan of Naic, Cavite Office is located in
-                  Municipal Hall of Naic, Addressed at Barangay Ibayo Silangan,
-                  Naic, Cavite."
-                </p>
+              <p className="mt-3 sm:mt-6 text-center text-gray-800 md:text-md tracking-wide">
+                " The Sangguniang Bayan of Naic, Cavite Office is located in
+                Municipal Hall of Naic, Addressed at Barangay Ibayo Silangan,
+                Naic, Cavite."
               </p>
 
-              <div class="mt-10 text-center">
+              <div className="mt-10 text-center">
                 <a
-                  class="bg-none border-4 border-gray-800 hover:bg-gray-800 hover:text-gray-200 text-gray-800 text-sm font-bold py-2 px-4 rounded-full"
+                  className="bg-none border-4 border-gray-800 hover:bg-gray-800 hover:text-gray-200 text-gray-800 text-sm font-bold py-2 px-4 rounded-full"
                   href="https://maps.app.goo.gl/szvUz5Mc41PfCLzE7"
                 >
                   Locate on Google Maps
@@ -65,14 +61,14 @@ const About = () => {
           <hr className="sm:block md:hidden border-gray-800"></hr>
 
           {/* <!-- Card --> */}
-          <div class="flex flex-col bg-transparent">
-            <div class="flex-auto p-4 md:p-6">
+          <div className="flex flex-col bg-transparent">
+            <div className="flex-auto p-4 md:p-6">
               <h1 className="font-bold text-center text-gray-800 tracking-widest uppercase">
                 Contacts
               </h1>
 
-              <div class="container mt-6 sm:mt-10 flex items-right">
-                <div class="ms-3 sm:ms-4">
+              <div className="container mt-6 sm:mt-10 flex items-right">
+                <div className="ms-3 sm:ms-4">
                   <div className="icon flex">
                     <img src={Phone} className="w-7" />
                     <a className="text text-gray-800">(046)856-0656/865-0650</a>
@@ -122,20 +118,20 @@ const About = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="#e6e6e6"
             stroke="#e6e6e6"
-            stroke-width="0.00024000000000000003"
+            strokeWidth="0.00024000000000000003"
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0">
+            <g id="SVGRepo_bgCarrier" strokeWidth="0">
               <path
                 transform="translate(-2.4, -2.4), scale(1.7999999999999998)"
                 fill="#557e8b"
                 d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z"
-                strokewidth="0"
+                strokeWidth="0"
               ></path>
             </g>
             <g
               id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               {" "}
@@ -147,9 +143,9 @@ const About = () => {
             </g>
           </svg>
         </div>
-        <form novalidate="" className="space-y-6">
+        <form noValidate="" className="space-y-6">
           <div>
-            <label for="email" className="text-sm">
+            <label htmlFor="email" className="text-sm">
               Email
             </label>
             <input
@@ -159,7 +155,7 @@ const About = () => {
             />
           </div>
           <div>
-            <label for="message" className="text-sm">
+            <label htmlFor="message" className="text-sm">
               Message
             </label>
             <textarea

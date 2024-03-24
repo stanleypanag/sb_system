@@ -22,18 +22,18 @@ const HeaderGuest = () => {
   return (
     <>
       {/* <!-- Announcement Banner --> */}
-      <div class="bg-gray-800">
-        <div class="max-w-[85rem] px-4 py-7 sm:px-6 lg:px-8 mx-auto">
+      <div className="bg-gray-800">
+        <div className="max-w-[85rem] px-4 py-7 sm:px-6 lg:px-8 mx-auto">
           {/* <!-- Grid --> */}
-          <div class="grid justify-center md:grid-cols-2 md:justify-between gap-2">
-            <div class="gap-2 text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
-              <p class="inline-block text-xs text-gray-300">
+          <div className="grid justify-center md:grid-cols-2 md:justify-between gap-2">
+            <div className="gap-2 text-center md:text-start md:order-2 md:flex md:justify-end md:items-center">
+              <p className="inline-block text-xs text-gray-300">
                 Want to download a copy?
               </p>
 
               <div className="auth-link flex justify-center items-center">
                 <Link
-                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-100 text-gray-900 disabled:opacity-50 disabled:pointer-events-none"
+                  className="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-100 text-gray-900 disabled:opacity-50 disabled:pointer-events-none"
                   to={"/login"}
                 >
                   sign in
@@ -42,7 +42,7 @@ const HeaderGuest = () => {
                   or
                 </div>
                 <Link
-                  class="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-100 text-gray-900 disabled:opacity-50 disabled:pointer-events-none"
+                  className="py-2 px-3 h-[1.5rem] inline-flex items-center rounded-full gap-x-1 text-xs font-semibold border border-gray-400 bg-gray-100 text-gray-900 disabled:opacity-50 disabled:pointer-events-none"
                   to={"/register"}
                 >
                   sign up
@@ -51,12 +51,16 @@ const HeaderGuest = () => {
             </div>
             {/* <!-- End Col --> */}
 
-            <div class="brand-logo flex items-center order-1">
+            <div className="brand-logo flex items-center order-1">
               <Link
-                class="inline-flex items-center gap-x-4 text-xl font-semibold"
+                className="inline-flex items-center gap-x-4 text-xl font-semibold"
                 to={"/"}
               >
-                <img class="w-[3rem] h-auto order-1" src={Logo} alt="Logo" />
+                <img
+                  className="w-[3rem] h-auto order-1"
+                  src={Logo}
+                  alt="Logo"
+                />
                 <h1 className="tracking-widest uppercase font-bold text-gray-200 text-xs order-2 font-poppins">
                   Naic Cavite Resolutions and Ordinances
                 </h1>
@@ -70,12 +74,12 @@ const HeaderGuest = () => {
       {/* <!-- End Announcement Banner --> */}
 
       {/* <!-- ========== HEADER ========== --> */}
-      <header class="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-900 bg-opacity-25 text-sm sm:pb-0 absolute">
+      <header className="flex flex-wrap sm:justify-start sm:flex-col z-50 w-full bg-gray-900 bg-opacity-25 text-sm sm:pb-0 absolute">
         <nav
-          class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
+          className="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-5"
           aria-label="Global"
         >
-          <div class="order-1 flex items-center justify-between">
+          <div className="order-1 flex items-center justify-between">
             <div className="join border-2 border-gray-900">
               <div>
                 <div>
@@ -113,41 +117,41 @@ const HeaderGuest = () => {
               </div>
             </div>
 
-            <div class="sm:hidden">
+            <div className="sm:hidden">
               <button
                 type="button"
-                class="hs-collapse-toggle size-10 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 bg-white disabled:opacity-50 disabled:pointer-events-none"
+                className="hs-collapse-toggle size-10 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 bg-white disabled:opacity-50 disabled:pointer-events-none"
                 data-hs-collapse="#navbar-collapse-with-animation"
                 aria-controls="navbar-collapse-with-animation"
                 aria-label="Toggle navigation"
               >
                 <svg
-                  class="hs-collapse-open:hidden flex-shrink-0 size-4"
+                  className="hs-collapse-open:hidden flex-shrink-0 size-4"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <line x1="3" x2="21" y1="6" y2="6" />
                   <line x1="3" x2="21" y1="12" y2="12" />
                   <line x1="3" x2="21" y1="18" y2="18" />
                 </svg>
                 <svg
-                  class="hs-collapse-open:block hidden flex-shrink-0 size-4"
+                  className="hs-collapse-open:block hidden flex-shrink-0 size-4"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path d="M18 6 6 18" />
                   <path d="m6 6 12 12" />
@@ -158,9 +162,9 @@ const HeaderGuest = () => {
 
           <div
             id="navbar-collapse-with-animation"
-            class="order-2 hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
+            className="order-2 hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
           >
-            <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
+            <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
               <Link to={"/"}>
                 <p className="link-text tracking-widest text-white text-xs text-center font-bold">
                   Home
