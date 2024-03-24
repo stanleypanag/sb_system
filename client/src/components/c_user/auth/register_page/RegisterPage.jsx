@@ -1,22 +1,52 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import Axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const RegisterPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    // To prevent default submission
+    e.preventDefault();
+    // You must put the port where your backend is running/listening
+    // post Method to pass the data
+    Axios.post("http://localhost:3000/auth/register", {
+      // These are the data that will pass, it is group as an object
+      email,
+      password,
+      confirmPassword,
+    })
+      // this are just for debugging purposes
+      .then((response) => {
+        if (response.data.status) {
+          navigate("/login");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      <div class="h-full">
-        <div class="bg-gray-300 flex h-full items-center pt-20">
-          <main class="w-full max-w-md mx-auto p-6">
-            <div class="mt-7 bg-gray-800 border border-gray-800 rounded-xl shadow-sm">
-              <div class="p-4 sm:p-7">
-                <div class="text-center">
-                  <h1 class="block text-5xl font-bold text-gray-400">
+      <div className="h-full">
+        <div className="bg-gray-300 flex h-full items-center pt-20">
+          <main className="w-full max-w-md mx-auto p-6">
+            <div className="mt-7 bg-gray-800 border border-gray-800 rounded-xl shadow-sm">
+              <div className="p-4 sm:p-7">
+                <div className="text-center">
+                  <h1 className="block text-5xl font-bold text-gray-400">
                     Sign up
                   </h1>
-                  <p class="mt-2 text-sm text-gray-400">
+                  <p className="mt-2 text-sm text-gray-400">
                     Already have an account?
                     <Link
-                      class="text-gray-400 decoration-2 hover:underline font-medium ml-1"
+                      className="text-gray-400 decoration-2 hover:underline font-medium ml-1"
                       to="/login"
                     >
                       Sign in here
@@ -24,13 +54,13 @@ const RegisterPage = () => {
                   </p>
                 </div>
 
-                <div class="mt-5">
+                <div className="mt-5">
                   <button
                     type="button"
-                    class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-800 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-800 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     <svg
-                      class="w-4 h-auto"
+                      className="w-4 h-auto"
                       width="46"
                       height="47"
                       viewBox="0 0 46 47"
@@ -56,34 +86,34 @@ const RegisterPage = () => {
                     Sign up with Google
                   </button>
 
-                  <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6">
+                  <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6">
                     Or
                   </div>
 
                   {/* <!-- Form --> */}
-                  <form>
-                    <div class="grid gap-y-4">
+                  <form onSubmit={handleSubmit}>
+                    <div className="grid gap-y-4">
                       {/* <!-- Form Group --> */}
                       <div>
                         <label
-                          for="email"
-                          class="block text-sm mb-2 text-gray-400"
+                          htmlFor="email"
+                          className="block text-sm mb-2 text-gray-400"
                         >
                           Email address
                         </label>
-                        <div class="relative">
+                        <div className="relative">
                           <input
                             style={{backgroundColor: "white"}}
                             type="email"
                             id="email"
                             name="email"
-                            class="py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm text-black focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                            requigray
+                            className="py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm text-black focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="email-error"
+                            onChange={(e) => setEmail(e.target.value)}
                           />
-                          <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                          <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
-                              class="h-5 w-5 text-gray-500"
+                              className="h-5 w-5 text-gray-500"
                               width="16"
                               height="16"
                               fill="currentColor"
@@ -95,7 +125,7 @@ const RegisterPage = () => {
                           </div>
                         </div>
                         <p
-                          class="hidden text-xs text-gray-600 mt-2"
+                          className="hidden text-xs text-gray-600 mt-2"
                           id="email-error"
                         >
                           Please include a valid email address so we can get
@@ -107,24 +137,24 @@ const RegisterPage = () => {
                       {/* <!-- Form Group --> */}
                       <div>
                         <label
-                          for="password"
-                          class="block text-sm mb-2 text-gray-400"
+                          htmlFor="password"
+                          className="block text-sm mb-2 text-gray-400"
                         >
                           Password
                         </label>
-                        <div class="relative">
+                        <div className="relative">
                           <input
                             style={{backgroundColor: "white"}}
                             type="password"
                             id="password"
                             name="password"
-                            class="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                            requigray
+                            className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="password-error"
+                            onChange={(e) => setPassword(e.target.value)}
                           />
-                          <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                          <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
-                              class="h-5 w-5 text-gray-500"
+                              className="h-5 w-5 text-gray-500"
                               width="16"
                               height="16"
                               fill="currentColor"
@@ -136,7 +166,7 @@ const RegisterPage = () => {
                           </div>
                         </div>
                         <p
-                          class="hidden text-xs text-gray-400 mt-2 "
+                          className="hidden text-xs text-gray-400 mt-2 "
                           id="password-error"
                         >
                           8+ characters requigray
@@ -147,24 +177,24 @@ const RegisterPage = () => {
                       {/* <!-- Form Group --> */}
                       <div>
                         <label
-                          for="confirm-password"
-                          class="block text-sm mb-2 text-gray-400"
+                          htmlFor="confirm-password"
+                          className="block text-sm mb-2 text-gray-400"
                         >
                           Confirm Password
                         </label>
-                        <div class="relative">
+                        <div className="relative">
                           <input
                             style={{backgroundColor: "white"}}
                             type="password"
                             id="confirm-password"
                             name="confirm-password"
-                            class="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                            requigray
+                            className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="confirm-password-error"
+                            onChange={(e) => setconfirmPassword(e.target.value)}
                           />
-                          <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                          <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
-                              class="h-5 w-5 text-gray-500"
+                              className="h-5 w-5 text-gray-500"
                               width="16"
                               height="16"
                               fill="currentColor"
@@ -176,7 +206,7 @@ const RegisterPage = () => {
                           </div>
                         </div>
                         <p
-                          class="hidden text-xs text-gray-600 mt-2"
+                          className="hidden text-xs text-gray-600 mt-2"
                           id="confirm-password-error"
                         >
                           Password does not match the password
@@ -185,23 +215,23 @@ const RegisterPage = () => {
                       {/* <!-- End Form Group --> */}
 
                       {/* <!-- Checkbox --> */}
-                      <div class="flex items-center">
-                        <div class="flex">
+                      <div className="flex items-center">
+                        <div className="flex">
                           <input
                             id="remember-me"
                             name="remember-me"
                             type="checkbox"
-                            class="shrink-0 mt-0.5 border-gray-200 rounded text-white pointer-events focus:ring-blue-500"
+                            className="shrink-0 mt-0.5 border-gray-200 rounded text-white pointer-events focus:ring-blue-500"
                           />
                         </div>
-                        <div class="ms-3">
+                        <div className="ms-3">
                           <label
-                            for="remember-me"
-                            class="text-sm text-gray-400"
+                            htmlFor="remember-me"
+                            className="text-sm text-gray-400"
                           >
                             I accept the{" "}
                             <a
-                              class="text-gray-400 decoration-2 hover:underline font-medium"
+                              className="text-gray-400 decoration-2 hover:underline font-medium"
                               href="#"
                             >
                               Terms and Conditions
@@ -213,7 +243,7 @@ const RegisterPage = () => {
 
                       <button
                         type="submit"
-                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-700 text-gray-200 hover:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none"
+                        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-700 text-gray-200 hover:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none"
                       >
                         Sign up
                       </button>
