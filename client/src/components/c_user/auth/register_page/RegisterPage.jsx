@@ -1,37 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import Axios from "axios";
-import {useNavigate} from "react-router-dom";
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
-
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    // To prevent default submission
-    e.preventDefault();
-    // You must put the port where your backend is running/listening
-    // post Method to pass the data
-    Axios.post("http://localhost:3000/auth/register", {
-      // These are the data that will pass, it is group as an object
-      email,
-      password,
-      confirmPassword,
-    })
-      // this are just for debugging purposes
-      .then((response) => {
-        if (response.data.status) {
-          navigate("/login");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <>
       <div className="h-full">
@@ -91,7 +61,7 @@ const RegisterPage = () => {
                   </div>
 
                   {/* <!-- Form --> */}
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <div className="grid gap-y-4">
                       {/* <!-- Form Group --> */}
                       <div>
@@ -109,7 +79,6 @@ const RegisterPage = () => {
                             name="email"
                             className="py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm text-black focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="email-error"
-                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
@@ -150,7 +119,6 @@ const RegisterPage = () => {
                             name="password"
                             className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="password-error"
-                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
@@ -190,7 +158,6 @@ const RegisterPage = () => {
                             name="confirm-password"
                             className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="confirm-password-error"
-                            onChange={(e) => setconfirmPassword(e.target.value)}
                           />
                           <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg

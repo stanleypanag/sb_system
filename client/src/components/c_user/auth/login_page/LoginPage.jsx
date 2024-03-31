@@ -1,34 +1,7 @@
-import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import Axios from "axios";
-import {useNavigate} from "react-router-dom";
 import "./login.css";
 
-const LoginPage = ({setLoggedIn}) => {
-  // Receive setLoggedIn function as a prop
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    Axios.post("http://localhost:3000/auth/login", {
-      email,
-      password,
-    })
-      .then((response) => {
-        if (response.data.status) {
-          // Set the loggedIn state to true
-          setLoggedIn(true);
-          // Redirect the user
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+const LoginPage = () => {
   return (
     <>
       <div className="h-full">
@@ -88,7 +61,7 @@ const LoginPage = ({setLoggedIn}) => {
                   </div>
 
                   {/* <!-- Form --> */}
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <div className="grid gap-y-4">
                       {/* <!-- Form Group --> */}
                       <div>
@@ -105,7 +78,6 @@ const LoginPage = ({setLoggedIn}) => {
                             name="email"
                             className="searchbox py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="email-error"
-                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
@@ -139,7 +111,6 @@ const LoginPage = ({setLoggedIn}) => {
                           >
                             Password
                           </label>
-
                           <div className="text-center">
                             <button
                               type="button"
@@ -149,9 +120,7 @@ const LoginPage = ({setLoggedIn}) => {
                               Forgot Password?
                             </button>
                           </div>
-
-                          {/* FORM MODAL FOR FORGOT PASSWORD*/}
-
+                          {/* //! FORM MODAL FOR FORGOT PASSWORD*/}
                           {/* <div
                             id="hs-sign-out-alert"
                             className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto"
@@ -217,9 +186,7 @@ const LoginPage = ({setLoggedIn}) => {
                                                     name="email1"
                                                     className="searchbox py-3 px-4 block w-full border border-gray-900 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                                     aria-describedby="email-error"
-                                                    onChange={(e) =>
-                                                      setEmail(e.target.value)
-                                                    }
+                                                  
                                                   />
                                                   <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                                     <svg
@@ -270,7 +237,6 @@ const LoginPage = ({setLoggedIn}) => {
                             name="password"
                             className="searchbox py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="password-error"
-                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                             <svg
