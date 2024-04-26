@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./resolution.css";
-import {resolutionData} from "./resolution.js";
+import { resolutionData } from "./resolution.js";
 import boyerMooreSearch from "./boyerMoore";
 
 const Resolution = () => {

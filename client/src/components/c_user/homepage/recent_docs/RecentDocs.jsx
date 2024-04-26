@@ -1,5 +1,9 @@
-import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import OrdinanceTemp from "./templates/ordinanceTemp";
+import ResolutionTemp from "./templates/resolutionTemp";
+
 import "./recentDocs.css";
 
 const RecentDocs = () => {
@@ -25,145 +29,28 @@ const RecentDocs = () => {
         <div className="max-w-[85rem] px-10 py-5 mx-auto">
           {/* <!-- Grid --> */}
           <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
+            {/* FETCH DATA FROM API WILL PASS HERE!! */}
 
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
-
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
-
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
+            <ResolutionTemp
+              resolutionNum="Resolution No. 10898"
+              resolutionTitle="Resolution for me"
+              resolutionContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+            />
+            <ResolutionTemp
+              resolutionNum="Resolution No. 10898"
+              resolutionTitle="Resolution for me"
+              resolutionContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+            />
+            <OrdinanceTemp
+              ordinanceNum="Ordinance No. 10898"
+              ordinanceTitle="Ordinance for me"
+              ordinanceContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+            />
+            <OrdinanceTemp
+              ordinanceNum="Ordinance No. 10898"
+              ordinanceTitle="Ordinance for me"
+              ordinanceContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+            />
           </div>
           {/* <!-- End Grid --> */}
         </div>
