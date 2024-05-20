@@ -33,23 +33,19 @@ const RecentDocs = () => {
 
             <ResolutionTemp
               resolutionNum="Resolution No. 10898"
-              resolutionTitle="Resolution for me"
-              resolutionContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+              resolutionTitle="Resolution Supporting the Application for a Grant from the State Department of Transportation for Road Improvement Projects"
             />
             <ResolutionTemp
               resolutionNum="Resolution No. 10898"
-              resolutionTitle="Resolution for me"
-              resolutionContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+              resolutionTitle="Resolution Approving the Annual Budget for Fiscal Year 2024-2025"
             />
             <OrdinanceTemp
               ordinanceNum="Ordinance No. 10898"
-              ordinanceTitle="Ordinance for me"
-              ordinanceContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+              ordinanceTitle="An Ordinance Establishing Noise Control Regulations to Maintain Public Peace and Order"
             />
             <OrdinanceTemp
               ordinanceNum="Ordinance No. 10898"
-              ordinanceTitle="Ordinance for me"
-              ordinanceContent="awjdhakwdgjahwdjagwdavwdhvgawdjvawjdvajwvd."
+              ordinanceTitle="An Ordinance Creating a Parks and Recreation Advisory Board to Enhance Community Engagement in Park Development and Maintenance"
             />
           </div>
           {/* <!-- End Grid --> */}

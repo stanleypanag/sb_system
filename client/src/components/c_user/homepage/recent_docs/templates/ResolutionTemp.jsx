@@ -8,12 +8,7 @@ const ResolutionTemp = (props) => {
         <p className="mt-1 text-sm text-white">{props.resolutionNum}</p>
       </div>
       <div className="p-4 md:p-5">
-        <h3 className="text-lg font-bold text-gray-800">
-          {props.resolutionTitle}
-        </h3>
-        <p className="mt-2 text-gray-500 truncate ...">
-          {props.resolutionContent}
-        </p>
+        <h1 className="text-sm text-gray-800">{props.resolutionTitle}</h1>
         <a
           className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
           href="#"

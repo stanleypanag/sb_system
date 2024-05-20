@@ -1,7 +1,5 @@
 import React from "react";
-import {Route, Routes, BrowserRouter} from "react-router-dom";
-
-// imports from Component/c_guest
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import {
   Homepage,
   Resolution,
@@ -11,14 +9,16 @@ import {
   HeaderGuest,
   HeaderRegular,
 } from "../../components/c_user";
+import Footer from "../../components/reusable/footer/Footer";
 
-const User = () => {
+import PropTypes from "prop-types";
+
+const User = (props) => {
   return (
     <BrowserRouter>
       <>
         <div className="header">
-          <HeaderGuest />
-          {/* <HeaderRegular /> */}
+          {props.value ? <HeaderRegular /> : <HeaderGuest />}
         </div>
         <div className="content">
           <Routes>
@@ -29,9 +29,14 @@ const User = () => {
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
         </div>
+        <Footer />
       </>
     </BrowserRouter>
   );
+};
+
+User.protoTypes = {
+  value: PropTypes.bool,
 };
 
 export default User;

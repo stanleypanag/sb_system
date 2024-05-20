@@ -1,13 +1,22 @@
 import React from "react";
-import {User} from "./loader/index";
-import Footer from "./components/reusable/footer/Footer";
+import { Admin, User } from "./loader/index";
 
 const App = () => {
+  const isAuthenticated = false;
+  const isAdmin = false;
+
   return (
-    <>
-      <User />
-      <Footer />
-    </>
+    <div>
+      {isAuthenticated ? (
+        isAdmin ? (
+          <Admin />
+        ) : (
+          <User value={isAuthenticated} />
+        )
+      ) : (
+        <User value={false} />
+      )}
+    </div>
   );
 };
 

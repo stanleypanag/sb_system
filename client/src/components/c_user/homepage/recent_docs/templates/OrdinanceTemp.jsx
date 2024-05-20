@@ -8,12 +8,7 @@ const OrdinanceTemp = (props) => {
         <p className="mt-1 text-sm text-white">{props.ordinanceNum}</p>
       </div>
       <div className="p-4 md:p-5">
-        <h3 className="text-lg font-bold text-gray-800">
-          {props.ordinanceTitle}
-        </h3>
-        <p className="mt-2 text-gray-500 truncate ...">
-          {props.ordinanceContent}
-        </p>
+        <p className="text-sm text-gray-800">{props.ordinanceTitle}</p>
         <a
           className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
           href="#"
