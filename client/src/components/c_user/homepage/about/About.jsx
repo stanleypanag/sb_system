@@ -145,7 +145,7 @@ const About = () => {
         </div>
         <form noValidate="" className="space-y-6">
           <div>
-            <label htmlFor="email" className="text-sm">
+            <label htmlFor="email" className="text-sm text-white">
               Email
             </label>
             <input
@@ -155,7 +155,7 @@ const About = () => {
             />
           </div>
           <div>
-            <label htmlFor="message" className="text-sm">
+            <label htmlFor="message" className="text-sm text-white">
               Message
             </label>
             <textarea
@@ -166,7 +166,7 @@ const About = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-900"
+            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-900 text-gray-400"
           >
             Send Message
           </button>
