@@ -168,7 +168,7 @@ const AdminResolutionManager = () => {
                     <input
                       type="text"
                       className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                      placeholder="Edit Ordinance Number"
+                      placeholder="Edit Resolution Number"
                     />
                   </div>
                 </div>
