@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AdminUserManager = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="p-20">
       <div className="flex flex-col">
@@ -99,6 +109,7 @@ const AdminUserManager = () => {
                         <button
                           type="button"
                           className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
+                          onClick={handleOpenModal}
                         >
                           Edit
                         </button>
@@ -111,6 +122,92 @@ const AdminUserManager = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <div
+          id="hs-modal-editResolution"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-gray-950/90"
+        >
+          <div className="bg-white border shadow-sm rounded-xl w-full max-w-lg p-4 m-3">
+            <div className="flex justify-between items-center py-3 px-4 border-b">
+              <h3 className="font-bold text-gray-800">Edit Resolution</h3>
+              <button
+                type="button"
+                className="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+                onClick={handleCloseModal}
+              >
+                <span className="sr-only">Close</span>
+                <svg
+                  className="flex-shrink-0 size-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto">
+              <form>
+                {/* <!-- Section --> */}
+                <div className="grid sm:grid-cols-2 gap-2">
+                  <label
+                    for="hs-radio-in-form"
+                    className="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+                  >
+                    <input
+                      type="radio"
+                      name="hs-radio-in-form"
+                      className="shrink-0 mt-0.5 border border-gray-800 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                      id="hs-radio-in-form"
+                    />
+                    <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">
+                      Regular User
+                    </span>
+                  </label>
+
+                  <label
+                    for="hs-radio-checked-in-form"
+                    className="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+                  >
+                    <input
+                      type="radio"
+                      name="hs-radio-in-form"
+                      className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700"
+                      id="hs-radio-checked-in-form"
+                    />
+                    <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">
+                      Admin
+                    </span>
+                  </label>
+                </div>
+                {/* <!-- End Section --> */}
+              </form>
+            </div>
+            <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
+              <button
+                type="button"
+                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                onClick={handleCloseModal}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
