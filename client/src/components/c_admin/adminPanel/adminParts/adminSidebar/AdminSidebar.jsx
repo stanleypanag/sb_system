@@ -62,7 +62,7 @@ const AdminSidebar = () => {
                   >
                     <img src={Ordinance} />
 
-                    <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
+                    <span className="invisible absolute start-full top-1 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                       Manage Ordinance
                     </span>
                   </Link>
@@ -122,9 +122,9 @@ const AdminSidebar = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <path d="M18 6 6 18" />
                     <path d="m6 6 12 12" />

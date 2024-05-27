@@ -2,8 +2,8 @@ import React from "react";
 import { Admin, User } from "./loader/index";
 
 const App = () => {
-  const isAuthenticated = true;
-  const isAdmin = true;
+  const isAuthenticated = false;
+  const isAdmin = false;
 
   return (
     <div>

@@ -8,9 +8,11 @@ const ResolutionTemp = (props) => {
         <p className="mt-1 text-sm text-white">{props.resolutionNum}</p>
       </div>
       <div className="p-4 md:p-5">
-        <h1 className="text-sm text-gray-800">{props.resolutionTitle}</h1>
+        <h1 className="text-sm text-gray-800 font-semibold">
+          {props.resolutionTitle}
+        </h1>
         <a
-          className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
+          className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
           href="#"
         >
           Card link
