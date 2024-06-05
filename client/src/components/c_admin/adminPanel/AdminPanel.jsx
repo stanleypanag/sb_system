@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  AdminDashbaord,
   AdminSidebar,
   AdminUserManager,
   AdminResolutionManager,
@@ -18,7 +17,6 @@ const AdminPanel = () => {
 
         <main className="bg-gray-700 w-full h-[100vh]">
           <Routes>
-            <Route path="/" element={<AdminDashbaord />} />
             <Route path="/userManager" element={<AdminUserManager />} />
             <Route
               path="/resolutionManager"
