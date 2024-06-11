@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./resolution.css";
 import { resolutionData } from "./resolution.js";
-import boyerMooreSearch from "./boyerMoore";
+import boyerMooreSearch from "../algorithm/boyerMoore.js";
 
 const Resolution = () => {
   const [search, setSearch] = useState("");
@@ -36,36 +36,20 @@ const Resolution = () => {
 
             {/* <!--Resolution Card --> */}
             <div className="grid lg:grid-cols-1 lg:gap-y-10 gap-10">
-              {/* {resolutionData
-                .filter((item) => {
-                  const searchLower = search.toLowerCase();
-                  const yearString = String(item.year); // Convert to string
-                  return (
-                    searchLower === "" ||
-                    item.resolution_number
-                      .toLowerCase()
-                      .includes(searchLower) ||
-                    item.title.toLowerCase().includes(searchLower) ||
-                    yearString.toLowerCase().includes(searchLower)
-                  );
-                }) */}
               {resolutionData
                 .filter((item) => {
                   const searchLower = search.toLowerCase();
-                  const yearString = String(item.year); // Convert to string
+                  const yearString = String(item.doc_series_yr); // Convert to string
 
-                  const resolutionNumberLower =
-                    item.resolution_number.toLowerCase();
-                  const titleLower = item.title.toLowerCase();
-                  const contentLower = item.content.toLowerCase();
+                  const resolutionNumberLower = item.doc_number.toLowerCase();
+                  const titleLower = item.doc_title.toLowerCase();
 
                   return (
                     searchLower === "" ||
                     boyerMooreSearch(resolutionNumberLower, searchLower) !==
                       -1 ||
                     boyerMooreSearch(titleLower, searchLower) !== -1 ||
-                    boyerMooreSearch(yearString, searchLower) !== -1 ||
-                    boyerMooreSearch(contentLower, searchLower) !== -1
+                    boyerMooreSearch(yearString, searchLower) !== -1
                   );
                 })
                 .map((item) => (
@@ -73,20 +57,23 @@ const Resolution = () => {
                     className="flex flex-col bg-white border border-gray-400 shadow-sm"
                     key={item.id}
                   >
-                    <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5">
-                      <p className="mt-1 text-sm text-white">
-                        Resolution No. {item.resolution_number}
+                    <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 flex justify-between">
+                      <p className="mt-1 text-sm text-white uppercase">
+                        Resolution No. {item.doc_number}
+                      </p>
+                      <p className="mt-1 text-sm text-gray-200">
+                        S.Y. {item.doc_series_yr}
                       </p>
                     </div>
                     <div className="p-4 md:p-5">
-                      <h3 className="text-lg font-bold text-gray-800">
-                        {item.title}
+                      <h3 className="text-m font-light text-gray-600 text-justify">
+                        {item.doc_title}
                       </h3>
                       <a
                         className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
                         href="#"
                       >
-                        Card link
+                        View Document
                         <svg
                           className="flex-shrink-0 w-4 h-4"
                           xmlns="http://www.w3.org/2000/svg"

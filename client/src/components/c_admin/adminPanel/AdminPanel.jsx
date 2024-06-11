@@ -10,8 +10,8 @@ import { Routes, Route } from "react-router-dom";
 const AdminPanel = () => {
   return (
     <>
-      <div className="flex flex-row h-full">
-        <aside className="h-full">
+      <div className="flex flex-row h-[full]">
+        <aside className="h-[full]">
           <AdminSidebar />
         </aside>
 
@@ -20,7 +20,7 @@ const AdminPanel = () => {
             backgroundImage:
               "linear-gradient(to right top, #fcf6d6, #c0af9c, #806f68, #403737, #000000)",
           }}
-          className="w-full h-[100vh]"
+          className="w-full h-[full]"
         >
           <Routes>
             <Route path="/" element={<AdminUserManager />} />

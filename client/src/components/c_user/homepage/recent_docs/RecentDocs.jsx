@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import OrdinanceTemp from "./templates/ordinanceTemp";
-import ResolutionTemp from "./templates/resolutionTemp";
+import RecentDocsTemp from "./templates/RecentDocsTemp.jsx";
 
 import "./recentDocs.css";
 
 const RecentDocs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
-  // Reset dropdown state when the component mounts or updates
   useEffect(() => {
     setIsDropdownOpen(false);
-  }, [window.location.pathname]); // Use the pathname as a dependency to detect route changes
+  }, [window.location.pathname]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -28,24 +25,27 @@ const RecentDocs = () => {
         {/* <!-- Card Blog --> */}
         <div className="max-w-[85rem] px-10 py-5 mx-auto">
           {/* <!-- Grid --> */}
-          <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
+          <div className="grid lg:grid-cols-3 lg:gap-y-16 gap-10">
             {/* FETCH DATA FROM API WILL PASS HERE!! */}
+            <RecentDocsTemp
+              doc_type="Resolution"
+              doc_num="10898"
+              doc_title="Resolution Supporting the Application for a Grant from the State Department of Transportation for Road Improvement Projects"
+              doc_series_yr="2023"
+            />
 
-            <ResolutionTemp
-              resolutionNum="Resolution No. 10898"
-              resolutionTitle="Resolution Supporting the Application for a Grant from the State Department of Transportation for Road Improvement Projects"
+            {/* This is just for viewing  */}
+            <RecentDocsTemp
+              doc_type="Resolution"
+              doc_num="10898"
+              doc_title="Resolution Supporting the Application for a Grant from the State Department of Transportation for Road Improvement Projects"
+              doc_series_yr="2023"
             />
-            <ResolutionTemp
-              resolutionNum="Resolution No. 10898"
-              resolutionTitle="Resolution Approving the Annual Budget for Fiscal Year 2024-2025"
-            />
-            <OrdinanceTemp
-              ordinanceNum="Ordinance No. 10898"
-              ordinanceTitle="An Ordinance Establishing Noise Control Regulations to Maintain Public Peace and Order"
-            />
-            <OrdinanceTemp
-              ordinanceNum="Ordinance No. 10898"
-              ordinanceTitle="An Ordinance Creating a Parks and Recreation Advisory Board to Enhance Community Engagement in Park Development and Maintenance"
+            <RecentDocsTemp
+              doc_type="Resolution"
+              doc_num="10898"
+              doc_title="Resolution Supporting the Application for a Grant from the State Department of Transportation for Road Improvement Projects"
+              doc_series_yr="2023"
             />
           </div>
           {/* <!-- End Grid --> */}
