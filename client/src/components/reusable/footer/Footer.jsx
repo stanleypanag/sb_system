@@ -13,17 +13,17 @@ const Footer = () => {
               href="#"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-400">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-violet-400">
                 <img src={logo} />
               </div>
-              <span className="self-center text-xl font-semibold">
+              <span className="self-center text-xl font-semibold text-gray-300">
                 SB Naic Office
               </span>
             </a>
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-3">
             <div className="space-y-3">
-              <h3 className="tracki uppercase dark:text-gray-50">Documents</h3>
+              <h3 className="tracki uppercase text-gray-50">Documents</h3>
               <ul className="space-y-1">
                 <li>
                   <a
@@ -46,7 +46,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <h3 className="tracki uppercase dark:text-gray-50">Agency</h3>
+              <h3 className="tracki uppercase text-gray-50">Agency</h3>
               <ul className="space-y-1">
                 <li>
                   <a
@@ -60,7 +60,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <div className="uppercase dark:text-gray-50">Social media</div>
+              <div className="uppercase text-gray-50">Social media</div>
               <div className="flex justify-start space-x-3">
                 <a
                   rel="noopener noreferrer"
@@ -81,7 +81,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="py-6 text-sm text-center dark:text-gray-400">
+        <div className="py-6 text-sm text-center text-gray-400">
           © 2024 Sangguniang Bayan ng Naic. All rights reserved.
         </div>
       </footer>
