@@ -75,6 +75,12 @@ const AdminResolutionManager = () => {
                         scope="col"
                         className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
                       >
+                        SERIES YEAR
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
+                      >
                         PDF file
                       </th>
                       <th
@@ -90,16 +96,30 @@ const AdminResolutionManager = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
                         1
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        awdawd
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-wrap text-justify">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Adipisci dolorum ullam ipsam, odio quo quos omnis
+                        ut unde delectus, reprehenderit vel provident rem.
+                        Excepturi, fugiat doloribus! Ab soluta quibusdam ad!
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Quas aspernatur minima, reiciendis commodi
+                        delectus illo totam blanditiis soluta aperiam aliquid
+                        nam, recusandae perferendis voluptatem cupiditate!
+                        Architecto voluptatem dolorem expedita illo?
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
                         203945
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        resolution.pdf
+                        2023
                       </td>
-                      <td className="px-6 py-4 flex gap-3 whitespace-nowrap justify-end text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-wrap text-justify">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Corrupti a ipsum sequi libero laborum esse voluptatum.
+                        Ipsam reiciendis, sed hic eos dolore maxime itaque
+                        similique nisi quis quo, ratione corrupti!
+                      </td>
+                      <td className="px-6 flex gap-3 whitespace-nowrap justify-end">
                         <button
                           type="button"
                           className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"
@@ -170,9 +190,29 @@ const AdminResolutionManager = () => {
                       className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Edit Resolution Number"
                     />
+                    <input
+                      type="text"
+                      className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                      placeholder="Edit Series Year"
+                    />
+
+                    <form>
+                      <label for="small-file-input" class="sr-only">
+                        Choose file
+                      </label>
+                      <input
+                        type="file"
+                        name="small-file-input"
+                        id="small-file-input"
+                        class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
+      file:bg-gray-50 file:border-0
+      file:me-4
+      file:py-2 file:px-4
+      dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                      />
+                    </form>
                   </div>
                 </div>
-                {/* <!-- End Section --> */}
               </form>
             </div>
             <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">

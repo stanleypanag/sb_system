@@ -15,9 +15,15 @@ const AdminPanel = () => {
           <AdminSidebar />
         </aside>
 
-        <main className="bg-gray-700 w-full h-[100vh]">
+        <main
+          style={{
+            backgroundImage:
+              "linear-gradient(to right top, #fcf6d6, #c0af9c, #806f68, #403737, #000000)",
+          }}
+          className="w-full h-[100vh]"
+        >
           <Routes>
-            <Route path="/userManager" element={<AdminUserManager />} />
+            <Route path="/" element={<AdminUserManager />} />
             <Route
               path="/resolutionManager"
               element={<AdminResolutionManager />}

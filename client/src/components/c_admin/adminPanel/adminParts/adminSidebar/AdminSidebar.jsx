@@ -8,20 +8,23 @@ import Users from "../../../../assets/Users.png";
 const AdminSidebar = () => {
   return (
     <>
-      <div className="flex h-[100vh] w-16 flex-col justify-between border-e border-gray-400 bg-gray-200">
+      <div
+        className="flex h-[100vh] w-16 flex-col justify-between"
+        style={{ backgroundColor: "#FCF6D6" }}
+      >
         <div>
           <div className="inline-flex size-16 items-center justify-center">
-            <span className="grid size-10 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+            <span className="grid size-10 place-content-center rounded-lg bg-gray-800 text-xs text-gray-200">
               L
             </span>
           </div>
 
           <div className="border-t border-gray-100">
             <div className="px-2">
-              <ul className="space-y-1 border-t border-gray-100 pt-4">
+              <ul className="space-y-1 border-t border-gray-900 pt-4">
                 <li>
                   <Link
-                    to={"/userManager"}
+                    to={"/"}
                     className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                   >
                     <img src={Users} />
@@ -62,7 +65,7 @@ const AdminSidebar = () => {
         <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 p-2">
           <form>
             <button
-              type="submit"
+              type="button"
               className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
               data-hs-overlay="#hs-sign-out-alert"
             >
@@ -87,6 +90,7 @@ const AdminSidebar = () => {
             </button>
           </form>
         </div>
+
         {/* MODAL START */}
         <div
           id="hs-sign-out-alert"

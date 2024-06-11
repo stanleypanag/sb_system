@@ -97,7 +97,7 @@ const AdminUserManager = () => {
                         jhonBrown@gmail.com
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        Admin
+                        admin
                       </td>
                       <td className="px-6 py-4 flex gap-3 whitespace-nowrap justify-end text-sm font-medium">
                         <button
