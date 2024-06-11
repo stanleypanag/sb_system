@@ -39,16 +39,12 @@ const RegisterPage = () => {
 
       if (error) {
         setError(error.message);
-      } else {
-        const verificationToken = await supabase.auth.generateVerificationToken(
-          user.id
-        );
-        const verificationUrl = `https://your-app.com/verify-email?token=${verificationToken}&email=${email}`;
-
+      } else if (user) {
         setSuccess(
-          `A verification email has been sent to ${email}. Please click on the link to verify your email address.`
+          `A verification email has been sent to ${email}. Please check your inbox and click on the verification link to complete your registration.`
         );
-        setVerificationToken(verificationUrl);
+      } else {
+        setError("Something went wrong during sign-up. Please try again.");
       }
     } catch (error) {
       setError(error.message);
