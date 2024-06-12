@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../../../supabase/supabase.js";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,6 +21,8 @@ const RegisterPage = () => {
 
       if (error) {
         setError(error.message);
+      } else {
+        navigate("/", { replace: true });
       }
     } catch (error) {
       setError(error.message);
@@ -32,14 +37,22 @@ const RegisterPage = () => {
     }
 
     try {
-      const { user, error } = await supabase.auth.signUp({
+      const { user, session, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
       if (error) {
         setError(error.message);
-      } else if (user) {
+      }
+      if (user) {
+        // Extract the verification token from the session object
+        const verificationToken =
+          session?.data.session?.user.confirmation_token;
+
+        // Update the verificationToken state with the extracted token
+        setVerificationToken(verificationToken);
+
         setSuccess(
           `A verification email has been sent to ${email}. Please check your inbox and click on the verification link to complete your registration.`
         );

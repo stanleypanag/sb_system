@@ -4,14 +4,15 @@ import {
   AdminUserManager,
   AdminResolutionManager,
   AdminOrdinanceManager,
+  AdminDashboard,
 } from "./adminParts/index";
 import { Routes, Route } from "react-router-dom";
 
 const AdminPanel = () => {
   return (
     <>
-      <div className="flex flex-row h-[full]">
-        <aside className="h-[full]">
+      <div className="flex flex-row h-screen">
+        <aside>
           <AdminSidebar />
         </aside>
 
@@ -20,10 +21,10 @@ const AdminPanel = () => {
             backgroundImage:
               "linear-gradient(to right top, #fcf6d6, #c0af9c, #806f68, #403737, #000000)",
           }}
-          className="w-full h-[full]"
+          className="w-full overflow-y-auto"
         >
           <Routes>
-            <Route path="/" element={<AdminUserManager />} />
+            <Route path="/" element={<AdminDashboard />} />
             <Route
               path="/resolutionManager"
               element={<AdminResolutionManager />}
@@ -32,6 +33,7 @@ const AdminPanel = () => {
               path="/ordinanceManager"
               element={<AdminOrdinanceManager />}
             />
+            <Route path="/userManager" element={<AdminUserManager />} />
           </Routes>
         </main>
       </div>
