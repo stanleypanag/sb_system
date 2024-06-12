@@ -5,6 +5,7 @@ import {
   AdminResolutionManager,
   AdminOrdinanceManager,
   AdminDashboard,
+  AdminEventLogs,
 } from "./adminParts/index";
 import { Routes, Route } from "react-router-dom";
 
@@ -34,6 +35,7 @@ const AdminPanel = () => {
               element={<AdminOrdinanceManager />}
             />
             <Route path="/userManager" element={<AdminUserManager />} />
+            <Route path="/eventLogs" element={<AdminEventLogs />} />
           </Routes>
         </main>
       </div>

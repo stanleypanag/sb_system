@@ -75,7 +75,7 @@ const AdminUserManager = () => {
                         scope="col"
                         className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
                       >
-                        Role
+                        Is Admin
                       </th>
                       <th
                         scope="col"
@@ -97,7 +97,7 @@ const AdminUserManager = () => {
                         jhonBrown@gmail.com
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        admin
+                        true
                       </td>
                       <td className="px-6 py-4 flex gap-3 whitespace-nowrap justify-end text-sm font-medium">
                         <button
@@ -168,7 +168,7 @@ const AdminUserManager = () => {
                       id="hs-radio-in-form"
                     />
                     <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">
-                      Regular User
+                      false
                     </span>
                   </label>
 
@@ -183,7 +183,7 @@ const AdminUserManager = () => {
                       id="hs-radio-checked-in-form"
                     />
                     <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">
-                      Admin
+                      true
                     </span>
                   </label>
                 </div>
