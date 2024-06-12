@@ -16,7 +16,7 @@ const AdminOrdinanceManager = () => {
       <div className="flex flex-col">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
-            <div className="bg-blue-900 flex justify-center items-center h-[10vh]">
+            <div className="bg-gray-900 flex justify-center items-center h-[10vh]">
               <h1 className="text-gray-200">ORDINANCE TABLE MANAGER</h1>
             </div>
             <div className="divide-y bg-white divide-gray-200">
