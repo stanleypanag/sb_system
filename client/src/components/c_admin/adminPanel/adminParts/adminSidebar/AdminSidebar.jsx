@@ -5,11 +5,12 @@ import Dashboard from "../../../../assets/Dashboard.png";
 import Docs from "../../../../assets/Docs.png";
 import Profile from "../../../../assets/Profile.png";
 import WebView from "../../../../assets/WebView.png";
+import Event from "../../../../assets/Event.png";
+import { User } from "../../../../../loader/index.js";
 import { supabase } from "../../../../../supabase/supabase.js";
 
 const AdminSidebar = () => {
   const [userEmail, setUserEmail] = useState("");
-  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -99,18 +100,18 @@ const AdminSidebar = () => {
                 <span className="text-gray-300">User Manager</span>
               </Link>
             </li>
-          </ul>
-          <ul className="pt-10 space-y-5 text-sm">
             <li>
               <Link
                 rel="noopener noreferrer"
-                to=""
+                to="/eventLogs"
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
-                <img src={WebView} className="w-5 h-5 fill-current" />
-                <span className="text-gray-300">Webview</span>
+                <img src={Event} className="w-5 h-5 fill-current" />
+                <span className="text-gray-300">Event Logs</span>
               </Link>
             </li>
+          </ul>
+          <ul className="pt-10 space-y-5 text-sm">
             <li>
               <button
                 rel="noopener noreferrer"

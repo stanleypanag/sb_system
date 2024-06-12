@@ -44,8 +44,7 @@ const RegisterPage = () => {
 
       if (error) {
         setError(error.message);
-      }
-      if (user) {
+      } else if (user) {
         // Extract the verification token from the session object
         const verificationToken =
           session?.data.session?.user.confirmation_token;

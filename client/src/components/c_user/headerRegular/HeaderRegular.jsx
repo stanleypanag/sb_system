@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./headerRegular.css";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase/supabase.js"; // Adjust the import path if necessary
 import Logo from "../../assets/logo.png";
+import "./headerRegular.css";
 
 const HeaderRegular = () => {
   const navigate = useNavigate();

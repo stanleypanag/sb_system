@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 import "./footer.css";
 
 const Footer = () => {
@@ -26,22 +27,22 @@ const Footer = () => {
               <h3 className="tracki uppercase text-gray-50">Documents</h3>
               <ul className="space-y-1">
                 <li>
-                  <a
+                  <Link
                     className="text-gray-500"
                     rel="noopener noreferrer"
-                    href="#"
+                    to={"/resolution"}
                   >
                     Resolutions
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="text-gray-500"
                     rel="noopener noreferrer"
-                    href="#"
+                    to={"/ordinance"}
                   >
                     Ordinances
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
