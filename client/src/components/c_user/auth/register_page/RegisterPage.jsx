@@ -22,7 +22,7 @@ const RegisterPage = () => {
       if (error) {
         setError(error.message);
       } else {
-        navigate("/", { replace: true });
+        navigate("/");
       }
     } catch (error) {
       setError(error.message);

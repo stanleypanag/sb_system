@@ -21,8 +21,6 @@ const App = () => {
           .eq("user_id", session.user.id)
           .single();
 
-        console.log(user);
-
         if (error) {
           console.error("Error fetching user data:", error);
           setIsAuthenticated(false);

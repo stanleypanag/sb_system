@@ -16,7 +16,7 @@ const HeaderGuest = () => {
   const handleAboutClick = (e) => {
     e.preventDefault();
     navigate("/");
-    setTimeout(scrollToAbout, 100);
+    setTimeout(scrollToAbout, 0);
   };
 
   return (

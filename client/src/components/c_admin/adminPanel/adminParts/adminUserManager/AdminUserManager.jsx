@@ -1,7 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../../../../supabase/supabase";
 
 const AdminUserManager = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const { data, error } = await supabase.from("users").select("*");
+
+        if (error) {
+          console.error("Error fetching data:", error);
+          setUsers([]);
+        } else {
+          console.log("Fetched users:", data); // Log fetched users for debugging
+          setUsers(data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setUsers([]);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -32,7 +55,7 @@ const AdminUserManager = () => {
                   />
                   <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
                     <svg
-                      className="size-4 text-gray-400 "
+                      className="size-4 text-gray-400"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -50,71 +73,57 @@ const AdminUserManager = () => {
                 </div>
               </div>
               <div className="overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200 ">
-                  <thead className="bg-gray-50 ">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
-                      >
-                        Phone
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
                       >
                         Email
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase "
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
                       >
                         Is Admin
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase "
+                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"
                       >
                         Action
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
-                        John Brown
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        09534837985
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        jhonBrown@gmail.com
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        true
-                      </td>
-                      <td className="px-6 py-4 flex gap-3 whitespace-nowrap justify-end text-sm font-medium">
-                        <button
-                          type="button"
-                          className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"
-                        >
-                          Delete
-                        </button>
-                        <button
-                          type="button"
-                          className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
-                          onClick={handleOpenModal}
-                        >
-                          Edit
-                        </button>
-                      </td>
-                    </tr>
+                    {users.map((user) => (
+                      <tr key={user.user_id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                          {user.email}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                          {user.is_admin !== null
+                            ? user.is_admin.toString()
+                            : "N/A"}
+                        </td>
+                        <td className="px-6 py-4 flex gap-3 whitespace-nowrap justify-end text-sm font-medium">
+                          <button
+                            type="button"
+                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"
+                          >
+                            Delete
+                          </button>
+                          <button
+                            type="button"
+                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
+                            onClick={handleOpenModal}
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -122,6 +131,7 @@ const AdminUserManager = () => {
           </div>
         </div>
       </div>
+
       {isModalOpen && (
         <div
           id="hs-modal-editResolution"
@@ -155,10 +165,9 @@ const AdminUserManager = () => {
             </div>
             <div className="p-4 overflow-y-auto">
               <form>
-                {/* <!-- Section --> */}
                 <div className="grid sm:grid-cols-2 gap-2">
                   <label
-                    for="hs-radio-in-form"
+                    htmlFor="hs-radio-in-form"
                     className="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <input
@@ -167,27 +176,22 @@ const AdminUserManager = () => {
                       className="shrink-0 mt-0.5 border border-gray-800 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       id="hs-radio-in-form"
                     />
-                    <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">
-                      false
-                    </span>
+                    <span className="text-sm text-gray-500 ms-3">false</span>
                   </label>
 
                   <label
-                    for="hs-radio-checked-in-form"
+                    htmlFor="hs-radio-checked-in-form"
                     className="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <input
                       type="radio"
                       name="hs-radio-in-form"
-                      className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700"
+                      className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       id="hs-radio-checked-in-form"
                     />
-                    <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">
-                      true
-                    </span>
+                    <span className="text-sm text-gray-500 ms-3">true</span>
                   </label>
                 </div>
-                {/* <!-- End Section --> */}
               </form>
             </div>
             <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
