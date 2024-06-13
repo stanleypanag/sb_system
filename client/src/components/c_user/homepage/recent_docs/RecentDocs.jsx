@@ -118,7 +118,7 @@ const RecentDocs = () => {
                 <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-white"></div>
               </div>
             ) : resolutionData.length === 0 ? (
-              <p className="text-center text-white ">No resolutions found.</p>
+              <p className="text-center text-white "></p>
             ) : (
               resolutionData.map((item) => (
                 <div

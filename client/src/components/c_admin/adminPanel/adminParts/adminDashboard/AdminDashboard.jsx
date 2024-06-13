@@ -39,8 +39,7 @@ const AdminDashboard = () => {
 
         const { count: userCount, error: userError } = await supabase
           .from("users")
-          .select("*")
-          .count();
+          .select("*", { count: "exact", distinct: true });
 
         if (userError) {
           console.error("Error fetching user count:", userError);
