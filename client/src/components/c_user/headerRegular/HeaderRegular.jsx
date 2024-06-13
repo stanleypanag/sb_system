@@ -8,6 +8,7 @@ const HeaderRegular = () => {
   const navigate = useNavigate();
 
   const [userEmail, setUserEmail] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -54,6 +55,10 @@ const HeaderRegular = () => {
     }
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <>
       <div className="bg-gray-800">
@@ -76,6 +81,7 @@ const HeaderRegular = () => {
                     tabIndex={0}
                     role="button"
                     className="btn btn-ghost btn-circle avatar"
+                    onClick={toggleDropdown}
                   >
                     <div className="w-10 rounded-full">
                       <svg
@@ -103,8 +109,11 @@ const HeaderRegular = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52"
+                    className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52 divide-y-2"
                   >
+                    <li>
+                      <a>Settings</a>
+                    </li>
                     <li>
                       <a onClick={handleLogout}>Logout</a>
                     </li>
@@ -217,6 +226,7 @@ const HeaderRegular = () => {
             </div>
           </div>
 
+          {/* MOBILE VIEW */}
           <div
             id="navbar-collapse-with-animation"
             className="order-2 hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
@@ -263,6 +273,9 @@ const HeaderRegular = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                   >
+                    <li>
+                      <a className="text-gray-900 text-xs">Settings</a>
+                    </li>
                     <li>
                       <a
                         className="text-gray-900 text-xs"

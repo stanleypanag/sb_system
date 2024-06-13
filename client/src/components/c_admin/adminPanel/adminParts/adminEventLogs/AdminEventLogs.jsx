@@ -1,8 +1,31 @@
-import React, { useState } from "react";
-import Close from "../../../../assets/Close.png";
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../../../../supabase/supabase";
 
 const AdminEventLogs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [eventLogs, setEventLogs] = useState([]);
+
+  useEffect(() => {
+    const fetchEventLogs = async () => {
+      try {
+        const { data, error } = await supabase.from("event_logs").select("*");
+
+        console.log(data);
+
+        if (error) {
+          console.error("Error fetching data:", error);
+          setEventLogs([]);
+        } else {
+          setEventLogs(data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setEventLogs([]);
+      }
+    };
+
+    fetchEventLogs();
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -53,37 +76,44 @@ const AdminEventLogs = () => {
                         scope="col"
                         className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase "
                       >
+                        BY USER
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase "
+                      >
                         ACTION
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
-                        1
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                        Deletion
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-wrap text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Asperiores, in doloremque! Harum blanditiis animi,
-                        praesentium quibusdam rerum suscipit delectus impedit
-                        tempore consequatur veritatis doloremque accusantium
-                        illum commodi assumenda sit asperiores.
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
-                        12-25-2024-12:00
-                      </td>
-                      <td className="px-6 py-4 flex gap-3 whitespace-nowrap text-sm font-medium">
-                        <button
-                          type="button"
-                          className="inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-900 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"
-                        >
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
+                    {eventLogs.map((event) => {
+                      <tr key={event.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
+                          {event.id}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                          {event.event_type}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-wrap text-justify">
+                          {event.event_description}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
+                          {event.created_at}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
+                          {event.by_user}
+                        </td>
+                        <td className="px-6 py-4 flex gap-3 whitespace-nowrap text-sm font-medium">
+                          <button
+                            type="button"
+                            className="inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-900 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>;
+                    })}
                   </tbody>
                 </table>
               </div>

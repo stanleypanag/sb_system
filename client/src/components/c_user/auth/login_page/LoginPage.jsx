@@ -145,6 +145,110 @@ const LoginPage = () => {
                           </button>
                         </div>
                       </div>
+                      {/* MODAL START */}
+                      <div
+                        id="hs-sign-out-alert"
+                        class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto"
+                      >
+                        <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                          <div class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                            <div class="absolute top-2 end-2">
+                              <button
+                                type="button"
+                                class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
+                                data-hs-overlay="#hs-sign-out-alert"
+                              >
+                                <span class="sr-only">Close</span>
+                                <svg
+                                  class="flex-shrink-0 size-4"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path d="M18 6 6 18" />
+                                  <path d="m6 6 12 12" />
+                                </svg>
+                              </button>
+                            </div>
+
+                            <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                              <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                <div class="bg-gray-400 border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-800">
+                                  <div class="p-4 sm:p-7">
+                                    <div class="text-center">
+                                      <h2 class="block text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                                        Forgot password?
+                                      </h2>
+                                    </div>
+
+                                    <div class="mt-5">
+                                      {/* <!-- Form --> */}
+                                      <form>
+                                        <div class="grid gap-y-4">
+                                          {/* <!-- Form Group --> */}
+                                          <div>
+                                            <label
+                                              for="email"
+                                              class="block text-sm mb-2 dark:text-white"
+                                            >
+                                              Email address
+                                            </label>
+                                            <div class="relative">
+                                              <input
+                                                type="email"
+                                                id="verifyEmail"
+                                                name="email"
+                                                class="py-3 px-4 block w-full border border-gray-800 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                required
+                                                aria-describedby="email-error"
+                                              />
+                                              <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+                                                <svg
+                                                  class="size-5 text-red-500"
+                                                  width="16"
+                                                  height="16"
+                                                  fill="currentColor"
+                                                  viewBox="0 0 16 16"
+                                                  aria-hidden="true"
+                                                >
+                                                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                                </svg>
+                                              </div>
+                                            </div>
+                                            <p
+                                              class="hidden text-xs text-red-600 mt-2"
+                                              id="email-error"
+                                            >
+                                              Please include a valid email
+                                              address so we can get back to you
+                                            </p>
+                                          </div>
+                                          {/* <!-- End Form Group --> */}
+
+                                          <button
+                                            type="submit"
+                                            class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-700 text-white hover:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none"
+                                          >
+                                            Reset password
+                                          </button>
+                                        </div>
+                                      </form>
+                                      {/* <!-- End Form --> */}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* MODAL END */}
                       <div className="relative">
                         <input
                           type="password"

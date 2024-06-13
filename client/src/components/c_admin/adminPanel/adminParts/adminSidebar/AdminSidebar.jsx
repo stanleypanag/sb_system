@@ -73,26 +73,6 @@ const AdminSidebar = () => {
             <li>
               <Link
                 rel="noopener noreferrer"
-                to="/resolutionManager"
-                className="flex items-center p-2 space-x-3 rounded-md"
-              >
-                <img src={Docs} className="w-5 h-5 fill-current" />
-                <span className="text-gray-300">Resolution Manager</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                rel="noopener noreferrer"
-                to="/ordinanceManager"
-                className="flex items-center p-2 space-x-3 rounded-md"
-              >
-                <img src={Docs} className="w-5 h-5 fill-current" />
-                <span className="text-gray-300">Ordinance Manager</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                rel="noopener noreferrer"
                 to="/userManager"
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
