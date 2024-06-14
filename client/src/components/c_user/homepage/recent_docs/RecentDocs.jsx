@@ -1,15 +1,99 @@
-import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../../../../supabase/supabase";
 import "./recentDocs.css";
 
 const RecentDocs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+  const [resolutionData, setResolutionData] = useState([]);
+  const [loggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Reset dropdown state when the component mounts or updates
   useEffect(() => {
     setIsDropdownOpen(false);
-  }, [window.location.pathname]); // Use the pathname as a dependency to detect route changes
+  }, [window.location.pathname]);
 
+  // NEW
+  useEffect(() => {
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        setIsLoggedIn(true);
+      }
+    };
+
+    const fetchData = async () => {
+      setIsLoading(true); // Set loading to true when fetching data
+
+      try {
+        // Simulate delay with setTimeout (remove in production)
+        const { data, error } = await supabase
+          .from("document")
+          .select("*")
+          .order("created_at", { ascending: false }) // Adjust the field name if necessary
+          .limit(3);
+
+        if (error) {
+          console.error("Error fetching data:", error);
+          setResolutionData([]);
+        } else if (!data || data.length === 0) {
+          console.log("No data found");
+          setResolutionData([]);
+        } else {
+          console.log("Data fetched:", data);
+          setResolutionData(data);
+        }
+
+        setIsLoading(false); // Set loading to false after data fetching completes
+        // Simulated delay of 2000 milliseconds (2 seconds)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setResolutionData([]);
+        setIsLoading(false); // Ensure loading state is turned off even on error
+      }
+    };
+
+    const fetchDataWithDelay = () => {
+      setTimeout(() => {
+        fetchSession();
+        fetchData();
+        setIsLoading(false); // Set loading to false after data fetching is complete
+      }, 1000); // Simulate 1 seconds loading delay
+    };
+
+    fetchDataWithDelay();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
+      fetchSession();
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+  // NEW
+  const handleViewDocument = async (documentId) => {
+    const bucketName = "pdf-bucket";
+    const filePath = `RESOLUTION/${documentId}`;
+
+    const { data, error } = await supabase.storage
+      .from(bucketName)
+      .createSignedUrl(filePath, 60); // 60 seconds expiration
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+    const pdfUrl = data.signedUrl;
+
+    window.open(pdfUrl, "_blank");
+  };
+
+  // NEW
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
@@ -22,148 +106,65 @@ const RecentDocs = () => {
         </h1>
 
         {/* <!-- Card Blog --> */}
-        <div className="max-w-[85rem] px-10 py-5 mx-auto">
+        <div className="max-w-[85rem] px-10 mx-auto">
           {/* <!-- Grid --> */}
-          <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
+          <div className="grid lg:grid-cols-3 lg:gap-y-16 gap-10">
+            {/* CARD PLACEMENT */}
+            {isLoading ? (
+              <div className="flex justify-center items-center w-[90vw]">
+                <h1 className="text-white text-xl mr-5 font-bold">
+                  Loading...
+                </h1>
+                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-white"></div>
               </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
+            ) : resolutionData.length === 0 ? (
+              <p className="text-center text-white "></p>
+            ) : (
+              resolutionData.map((item) => (
+                <div
+                  className="flex flex-col bg-white shadow-sm rounded-tl-xl rounded-tr-xl rounded-bl-lg rounded-br-lg"
+                  key={item.doc_id}
                 >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
+                  <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 flex justify-between rounded-tl-lg rounded-tr-lg">
+                    <p className="mt-1 text-sm text-white uppercase">
+                      {item.doc_type} No. {item.doc_number}
+                    </p>
+                    <p className="mt-1 text-sm text-gray-200">
+                      S.Y. {item.doc_series_yr}
+                    </p>
+                  </div>
+                  <div className="p-4 md:p-5">
+                    <h3 className="text-sm font-light text-gray-600 text-justify">
+                      {item.doc_title}
+                    </h3>
+                    <button
+                      className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
+                      type="button"
+                      onClick={() => handleViewDocument(item.doc_file_name)}
+                      disabled={!loggedIn}
+                    >
+                      {!loggedIn ? "Login to View" : "View Document"}
+                      <svg
+                        className="flex-shrink-0 w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
 
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
-
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
-
-            {/* <!--Resolution Card --> */}
-            <div className="flex flex-col bg-white shadow-sm rounded-lg">
-              <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 rounded-tl-lg rounded-tr-lg">
-                <p className="mt-1 text-sm text-white">Resolution No. 1</p>
-              </div>
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg font-bold text-gray-800">Card title</h3>
-                <p className="mt-2 text-gray-500">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a
-                  className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                  href="#"
-                >
-                  Card link
-                  <svg
-                    className="flex-shrink-0 w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            {/* <!--Resolution End Card --> */}
+            {/* END OF CARD PLACEMENT */}
           </div>
           {/* <!-- End Grid --> */}
         </div>

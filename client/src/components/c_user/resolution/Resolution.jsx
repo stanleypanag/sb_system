@@ -1,10 +1,94 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { supabase } from "../../../supabase/supabase";
+import boyerMooreSearch from "../algorithm/boyerMoore";
 import "./resolution.css";
-import {resolutionData} from "./resolution.js";
-import boyerMooreSearch from "./boyerMoore";
 
 const Resolution = () => {
   const [search, setSearch] = useState("");
+  const [responseData, setResponseData] = useState([]);
+  const [loggedIn, setIsLoggedIn] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentDocUrl, setCurrentDocUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        setIsLoggedIn(true);
+      }
+    };
+
+    const fetchDocument = async () => {
+      try {
+        const response = await axios.get(
+          "http://192.168.1.10:5000/api/documents/resolution/"
+        );
+        setResponseData(response.data.data);
+        console.log(response.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    const fetchDataWithDelay = () => {
+      setTimeout(() => {
+        fetchSession();
+        fetchDocument();
+        setIsLoading(false); // Set loading to false after data fetching is complete
+      }, 1000); // Simulate 1 seconds loading delay
+    };
+
+    fetchDataWithDelay();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
+      fetchSession();
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const filterData = () => {
+      const filtered = responseData.filter((item) => {
+        const searchLower = search.toLowerCase();
+        const yearString = String(item.doc_series_yr);
+        const resolutionNumberLower = String(item.doc_number);
+        const titleLower = item.doc_title.toLowerCase();
+
+        const containsSearch =
+          searchLower === "" ||
+          boyerMooreSearch(resolutionNumberLower, searchLower) ||
+          boyerMooreSearch(titleLower, searchLower) ||
+          boyerMooreSearch(yearString, searchLower);
+
+        return containsSearch;
+      });
+      setFilteredData(filtered);
+      console.log(filtered);
+    };
+
+    filterData();
+  }, [responseData, search]);
+
+  const openModal = (docUrl) => {
+    setCurrentDocUrl(docUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setCurrentDocUrl(null);
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -14,84 +98,54 @@ const Resolution = () => {
             <h1>Resolutions</h1>
           </div>
 
-          <label
-            htmlFor="hs-trailing-button-add-on-with-icon"
-            className="sr-only"
-          >
-            Label
+          <label htmlFor="search-input" className="sr-only">
+            Search
           </label>
           <div className="flex justify-center mt-10 rounded-lg shadow-sm">
             <input
               onChange={(e) => setSearch(e.target.value)}
               type="text"
-              placeholder="search by ff... [resolution number, title, year]"
-              id="hs-trailing-button-add-on-with-icon"
-              name="hs-trailing-button-add-on-with-icon"
-              className="py-3 px-4 block w-full border-2 border-gray-900 text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-gray-700 dark:text-black"
+              placeholder="search by [resolution number, title, year]"
+              id="search-input"
+              className="py-3 px-4 block w-full border-2 border-gray-900 text-sm dark:bg-white dark:border-gray-700 dark:text-black"
             />
           </div>
 
           <div className="max-w-[40rem] px-10 py-10 sm:px-6 lg:px-8 lg:py-16 mx-auto">
-            {/* <!-- Grid --> */}
-
-            {/* <!--Resolution Card --> */}
             <div className="grid lg:grid-cols-1 lg:gap-y-10 gap-10">
-              {/* {resolutionData
-                .filter((item) => {
-                  const searchLower = search.toLowerCase();
-                  const yearString = String(item.year); // Convert to string
-                  return (
-                    searchLower === "" ||
-                    item.resolution_number
-                      .toLowerCase()
-                      .includes(searchLower) ||
-                    item.title.toLowerCase().includes(searchLower) ||
-                    yearString.toLowerCase().includes(searchLower)
-                  );
-                }) */}
-              {resolutionData
-                .filter((item) => {
-                  const searchLower = search.toLowerCase();
-                  const yearString = String(item.year); // Convert to string
-
-                  const resolutionNumberLower =
-                    item.resolution_number.toLowerCase();
-                  const titleLower = item.title.toLowerCase();
-                  const contentLower = item.content.toLowerCase();
-
-                  return (
-                    searchLower === "" ||
-                    boyerMooreSearch(resolutionNumberLower, searchLower) !==
-                      -1 ||
-                    boyerMooreSearch(titleLower, searchLower) !== -1 ||
-                    boyerMooreSearch(yearString, searchLower) !== -1 ||
-                    boyerMooreSearch(contentLower, searchLower) !== -1
-                  );
-                })
-                .map((item) => (
+              {isLoading ? (
+                <div className="flex justify-center items-center">
+                  <h1 className="text-white text-xl mr-5 font-bold">
+                    Loading...
+                  </h1>
+                  <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-white"></div>
+                </div>
+              ) : (
+                filteredData.map((item) => (
                   <div
                     className="flex flex-col bg-white border border-gray-400 shadow-sm"
-                    key={item.id}
+                    key={item.doc_id}
                   >
-                    <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5">
-                      <p className="mt-1 text-sm text-white">
-                        Resolution No. {item.resolution_number}
+                    <div className="bg-gray-800 border-b py-3 px-4 md:py-4 md:px-5 flex justify-between">
+                      <p className="mt-1 text-sm text-white uppercase">
+                        Resolution No. {item.doc_number}
+                      </p>
+                      <p className="mt-1 text-sm text-gray-200">
+                        S.Y. {item.doc_series_yr}
                       </p>
                     </div>
                     <div className="p-4 md:p-5">
-                      <h3 className="text-lg font-bold text-gray-800">
-                        {item.title}
+                      <h3 className="text-m font-light text-gray-600 text-justify">
+                        {item.doc_title}
                       </h3>
-                      <p className="mt-2 text-gray-500">
-                        {item.content.length > 100
-                          ? item.content.slice(0, 100) + "..." // Limit content to 100 characters
-                          : item.content}
-                      </p>
-                      <a
+                      <button
                         className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                        href="#"
+                        type="button"
+                        disabled={!loggedIn}
+                        onClick={() => openModal(item.doc_file_url)}
                       >
-                        Card link
+                        {/* USER IS LOGGED IN OR NOT */}
+                        {!loggedIn ? "Login to View" : "View Document"}
                         <svg
                           className="flex-shrink-0 w-4 h-4"
                           xmlns="http://www.w3.org/2000/svg"
@@ -106,18 +160,65 @@ const Resolution = () => {
                         >
                           <path d="m9 18 6-6-6-6" />
                         </svg>
-                      </a>
+                      </button>
                     </div>
                   </div>
-                ))}
-
-              {/* <!--Resolution End Card --> */}
+                ))
+              )}
             </div>
-            {/* <!-- End Grid --> */}
           </div>
-          {/* <!-- End Card Blog --> */}
         </div>
       </main>
+
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-lg overflow-hidden max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center py-3 px-4 border-b">
+              <h3 className="font-bold text-gray-700 uppercase">
+                Resolution Document Viewer
+              </h3>
+              <button
+                type="button"
+                className="text-gray-800 hover:bg-gray-100 rounded-full p-2"
+                onClick={closeModal}
+              >
+                <svg
+                  className="w-6 h-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto">
+              <iframe src={currentDocUrl} width="100%" height="500" />
+            </div>
+            <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
+              <button
+                type="button"
+                className="py-2 px-3 text-sm font-medium rounded-lg border border-gray-200 bg-gray-400 text-gray-800 hover:bg-gray-50"
+                onClick={closeModal}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

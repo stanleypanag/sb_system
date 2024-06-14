@@ -1,4 +1,4 @@
-export const resolutionData = [
+export const ordinanceData = [
   {
     id: 1,
     doc_type: 'resolution',

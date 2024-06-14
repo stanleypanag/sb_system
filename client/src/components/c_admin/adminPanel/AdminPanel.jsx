@@ -1,0 +1,49 @@
+import React from "react";
+import {
+  AdminSidebar,
+  AdminUserManager,
+  AdminResolutionManager,
+  AdminOrdinanceManager,
+  AdminDashboard,
+  AdminEventLogs,
+} from "./adminParts/index";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Routes, Route } from "react-router-dom";
+
+const queryClient = new QueryClient();
+
+const AdminPanel = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className="flex flex-row h-screen">
+        <aside>
+          <AdminSidebar />
+        </aside>
+
+        <main
+          style={{
+            backgroundImage:
+              "linear-gradient(to right top, #fcf6d6, #c0af9c, #806f68, #403737, #000000)",
+          }}
+          className="w-full overflow-y-auto"
+        >
+          <Routes>
+            <Route path="/" element={<AdminDashboard />} />
+            <Route
+              path="/resolutionManager"
+              element={<AdminResolutionManager />}
+            />
+            <Route
+              path="/ordinanceManager"
+              element={<AdminOrdinanceManager />}
+            />
+            <Route path="/userManager" element={<AdminUserManager />} />
+            <Route path="/eventLogs" element={<AdminEventLogs />} />
+          </Routes>
+        </main>
+      </div>
+    </QueryClientProvider>
+  );
+};
+
+export default AdminPanel;

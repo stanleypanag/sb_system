@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { AdminPanel } from "../../components/c_admin";
+import { BrowserRouter } from "react-router-dom";
 
 const Admin = () => {
   return (
-    <div>Admin</div>
-  )
-}
+    <BrowserRouter>
+      <AdminPanel />
+    </BrowserRouter>
+  );
+};
 
-export default Admin
+export default Admin;

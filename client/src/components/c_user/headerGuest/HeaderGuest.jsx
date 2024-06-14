@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import "./headerGuest.css";
 
@@ -9,14 +9,14 @@ const HeaderGuest = () => {
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
-      aboutSection.scrollIntoView({behavior: "smooth"});
+      aboutSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const handleAboutClick = (e) => {
     e.preventDefault();
     navigate("/");
-    setTimeout(scrollToAbout, 100);
+    setTimeout(scrollToAbout, 0);
   };
 
   return (

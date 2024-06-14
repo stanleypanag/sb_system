@@ -1,7 +1,68 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../../../../supabase/supabase.js";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [verificationToken, setVerificationToken] = useState("");
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      });
+
+      if (error) {
+        setError(error.message);
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleManualSignUp = async (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const { user, session, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) {
+        setError(error.message);
+      } else if (user) {
+        // Extract the verification token from the session object
+        const verificationToken =
+          session?.data.session?.user.confirmation_token;
+
+        // Update the verificationToken state with the extracted token
+        setVerificationToken(verificationToken);
+
+        setSuccess(
+          `A verification email has been sent to ${email}. Please check your inbox and click on the verification link to complete your registration.`
+        );
+      } else {
+        setError("Something went wrong during sign-up. Please try again.");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <>
       <div className="h-full">
@@ -28,6 +89,7 @@ const RegisterPage = () => {
                   <button
                     type="button"
                     className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-800 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    onClick={handleGoogleSignIn}
                   >
                     <svg
                       className="w-4 h-auto"
@@ -60,10 +122,10 @@ const RegisterPage = () => {
                     Or
                   </div>
 
-                  {/* <!-- Form --> */}
-                  <form>
+                  {/* Form */}
+                  <form onSubmit={handleManualSignUp}>
                     <div className="grid gap-y-4">
-                      {/* <!-- Form Group --> */}
+                      {/* Form Group */}
                       <div>
                         <label
                           htmlFor="email"
@@ -73,10 +135,12 @@ const RegisterPage = () => {
                         </label>
                         <div className="relative">
                           <input
-                            style={{backgroundColor: "white"}}
+                            style={{ backgroundColor: "white" }}
                             type="email"
                             id="email"
                             name="email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
                             className="py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm text-black focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="email-error"
                           />
@@ -86,10 +150,10 @@ const RegisterPage = () => {
                               width="16"
                               height="16"
                               fill="currentColor"
-                              viewBox="0 0 16 16"
+                              viewBox="00 16 16"
                               aria-hidden="true"
                             >
-                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                              {/*... (no changes) */}
                             </svg>
                           </div>
                         </div>
@@ -101,9 +165,9 @@ const RegisterPage = () => {
                           back to you
                         </p>
                       </div>
-                      {/* <!-- End Form Group --> */}
+                      {/* End Form Group */}
 
-                      {/* <!-- Form Group --> */}
+                      {/* Form Group */}
                       <div>
                         <label
                           htmlFor="password"
@@ -113,10 +177,14 @@ const RegisterPage = () => {
                         </label>
                         <div className="relative">
                           <input
-                            style={{backgroundColor: "white"}}
+                            style={{ backgroundColor: "white" }}
                             type="password"
                             id="password"
                             name="password"
+                            value={password}
+                            onChange={(event) =>
+                              setPassword(event.target.value)
+                            }
                             className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="password-error"
                           />
@@ -129,7 +197,7 @@ const RegisterPage = () => {
                               viewBox="0 0 16 16"
                               aria-hidden="true"
                             >
-                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                              {/*... (no changes) */}
                             </svg>
                           </div>
                         </div>
@@ -140,9 +208,9 @@ const RegisterPage = () => {
                           8+ characters requigray
                         </p>
                       </div>
-                      {/* <!-- End Form Group --> */}
+                      {/* End Form Group */}
 
-                      {/* <!-- Form Group --> */}
+                      {/* Form Group */}
                       <div>
                         <label
                           htmlFor="confirm-password"
@@ -152,10 +220,14 @@ const RegisterPage = () => {
                         </label>
                         <div className="relative">
                           <input
-                            style={{backgroundColor: "white"}}
+                            style={{ backgroundColor: "white" }}
                             type="password"
                             id="confirm-password"
                             name="confirm-password"
+                            value={confirmPassword}
+                            onChange={(event) =>
+                              setConfirmPassword(event.target.value)
+                            }
                             className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="confirm-password-error"
                           />
@@ -168,7 +240,7 @@ const RegisterPage = () => {
                               viewBox="0 0 16 16"
                               aria-hidden="true"
                             >
-                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                              {/*... (no changes) */}
                             </svg>
                           </div>
                         </div>
@@ -179,9 +251,9 @@ const RegisterPage = () => {
                           Password does not match the password
                         </p>
                       </div>
-                      {/* <!-- End Form Group --> */}
+                      {/* End Form Group */}
 
-                      {/* <!-- Checkbox --> */}
+                      {/* Checkbox */}
                       <div className="flex items-center">
                         <div className="flex">
                           <input
@@ -206,7 +278,7 @@ const RegisterPage = () => {
                           </label>
                         </div>
                       </div>
-                      {/* <!-- End Checkbox --> */}
+                      {/* End Checkbox */}
 
                       <button
                         type="submit"
@@ -216,7 +288,22 @@ const RegisterPage = () => {
                       </button>
                     </div>
                   </form>
-                  {/* <!-- End Form --> */}
+                  {/* End Form */}
+
+                  {error && (
+                    <p className="text-xs text-red-600 mt-2">{error}</p>
+                  )}
+                  {success && (
+                    <p className="text-xs text-green-600 mt-2">
+                      {success}
+                      <Link
+                        className="text-green-600 decoration-2 hover:underline font-medium ml-1"
+                        to={`/verify-email?token=${verificationToken}&email=${email}`}
+                      >
+                        Verify email
+                      </Link>
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,12 +1,43 @@
-import React from "react";
-
-import "./about.css";
+import React, { useState, useEffect } from "react";
 import Phone from "../../../assets/phone.png";
 import Email from "../../../assets/email.png";
 import Facebook from "../../../assets/facebook.png";
-import Feedback from "../../../assets/feedback.png";
+import { supabase } from "../../../../supabase/supabase.js";
+import "./about.css";
 
 const About = () => {
+  const [userEmail, setUserEmail] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [emailPlaceHolder, setEmailPlaceholder] = useState("");
+  const [textAreaPlaceHolder, setTextAreaPlaceholder] = useState("");
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        const user = session.user;
+        setUserEmail(user.email);
+        setIsDisabled(false);
+      } else {
+        setEmailPlaceholder("You must first Login to enter email");
+        setTextAreaPlaceholder("You must first Login to send a message");
+      }
+    };
+
+    fetchSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
+      fetchSession();
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
     <>
       {/* <!-- About --> */}
@@ -145,28 +176,33 @@ const About = () => {
         </div>
         <form noValidate="" className="space-y-6">
           <div>
-            <label htmlFor="email" className="text-sm">
+            <label htmlFor="email" className="text-sm text-white">
               Email
             </label>
             <input
               id="email"
               type="email"
-              className="w-full p-3 rounded border border-gray-400 bg-gray-300 text-gray-500"
+              value={userEmail}
+              placeholder={emailPlaceHolder}
+              className="w-full p-3 rounded border border-gray-400 bg-gray-300 text-gray-800"
+              disabled={isDisabled}
             />
           </div>
           <div>
-            <label htmlFor="message" className="text-sm">
+            <label htmlFor="message" className="text-sm text-white">
               Message
             </label>
             <textarea
               id="message"
               rows="4"
+              placeholder={textAreaPlaceHolder}
               className="w-full p-3 rounded border border-gray-400 bg-gray-300 text-gray-500"
+              disabled={isDisabled}
             ></textarea>
           </div>
           <button
             type="submit"
-            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-900"
+            className="w-full p-3 text-sm font-bold tracki uppercase rounded bg-gray-900 text-gray-400"
           >
             Send Message
           </button>
