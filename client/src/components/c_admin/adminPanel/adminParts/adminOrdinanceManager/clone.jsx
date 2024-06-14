@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Error from "../../../../assets/Error.png";
 
-const AdminResolutionManager = () => {
+const clone = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingResolution, setEditingResolution] = useState(null);
   const queryClient = useQueryClient();
-  const [formData, setFormData] = useState({});
 
   const {
     isLoading,
@@ -30,61 +29,30 @@ const AdminResolutionManager = () => {
     },
   });
 
-  const { mutate } = useMutation({
-    mutationFn: () => {
-      const formDataToSend = new FormData();
-      formDataToSend.append("doc_type", formData.doc_type);
-      formDataToSend.append("doc_number", formData.doc_number);
-      formDataToSend.append("doc_series_yr", formData.doc_series_yr);
-      formDataToSend.append("doc_title", formData.doc_title);
-      formDataToSend.append("doc_file_path", formData.doc_file_path);
-
-      console.log(formData);
-      console.log("Request payload:", formDataToSend);
-      return fetch(
+  const editResolutionMutation = useMutation({
+    mutationFn: (formData) =>
+      fetch(
         `http://192.168.1.10:5000/api/documents/${editingResolution.doc_id}`,
         {
           method: "PUT",
-          body: formDataToSend,
+          body: formData,
         }
-      );
-    },
+      ),
     onSuccess: () => {
       queryClient.invalidateQueries(["documents", "resolutions"]);
       setEditingResolution(null);
       setIsModalOpen(false);
     },
-    onError: (error, variables, context) => {
-      console.error("Error updating document:", error);
-      alert(
-        "An error occurred while updating the document. Please try again later."
-      );
-    },
   });
 
   const handleOpenModal = (resolution) => {
     setEditingResolution(resolution);
-    setFormData({
-      doc_type: resolution.doc_type || "",
-      doc_title: resolution.doc_title || "",
-      doc_number: resolution.doc_number || "",
-      doc_series_yr: resolution.doc_series_yr || "",
-      doc_file_path: resolution.doc_file_path || null,
-    });
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setEditingResolution(null);
     setIsModalOpen(false);
-  };
-
-  const handleClose = () => setIsModalOpen(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    mutate(formData);
-    handleClose();
   };
 
   if (isLoading) {
@@ -99,18 +67,15 @@ const AdminResolutionManager = () => {
     return (
       <div className="flex justify-center items-center w-[83vw] h-[100vh]">
         <img src={Error} />
-        <div>
-          <h1 className="text-white text-xl mr-5 font-bold">
-            Error Loading Data!
-          </h1>
-          <p>Can't reach the server!</p>
-        </div>
+        <h1 className="text-white text-xl mr-5 font-bold">
+          Error Loading Data!
+        </h1>
       </div>
     );
   }
 
   return (
-    <div className="p-10">
+    <div className="p-20">
       <div className="flex flex-col">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
@@ -190,7 +155,7 @@ const AdminResolutionManager = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {resolutions.data.map((resolution) => (
+                    {resolutions.map((resolution) => (
                       <tr key={resolution.doc_id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 ">
                           {resolution.doc_id}
@@ -202,10 +167,10 @@ const AdminResolutionManager = () => {
                           {resolution.doc_number}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                          {resolution.doc_series_yr}
+                          {resolution.doc_series_year}
                         </td>
-                        <td className="py-4 whitespace-nowrap text-wrap text-sm text-gray-800">
-                          {resolution.doc_file_name}
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-wrap text-justify">
+                          {resolution.doc_file_url}
                         </td>
                         <td className="px-6 flex gap-3 whitespace-nowrap justify-end">
                           <button
@@ -274,49 +239,18 @@ const AdminResolutionManager = () => {
                     <input
                       id="af-payment-billing-contact"
                       type="text"
-                      value={formData.doc_title}
-                      name="doc_title"
-                      onChange={(e) =>
-                        setFormData({ ...formData, doc_title: e.target.value })
-                      }
                       className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Edit Title"
                     />
                     <input
                       type="text"
-                      value={formData.doc_number}
-                      name="doc_number"
-                      onChange={(e) =>
-                        setFormData({ ...formData, doc_number: e.target.value })
-                      }
                       className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Edit Resolution Number"
                     />
                     <input
                       type="text"
-                      value={formData.doc_series_yr}
-                      name="doc_series_yr"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          doc_series_yr: e.target.value,
-                        })
-                      }
                       className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Edit Series Year"
-                    />
-                    <input
-                      type="hidden"
-                      value={formData.doc_type}
-                      name="doc_type"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          doc_type: e.target.value,
-                        })
-                      }
-                      className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                      placeholder="Edit Doc Type"
                     />
 
                     <label htmlFor="small-file-input" className="sr-only">
@@ -324,13 +258,7 @@ const AdminResolutionManager = () => {
                     </label>
                     <input
                       type="file"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          doc_file_path: e.target.files[0],
-                        })
-                      }
-                      name="doc_file_path"
+                      name="small-file-input"
                       id="small-file-input"
                       className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
                     />
@@ -349,7 +277,6 @@ const AdminResolutionManager = () => {
               <button
                 type="button"
                 className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                onClick={handleSubmit}
               >
                 Save changes
               </button>
@@ -361,4 +288,4 @@ const AdminResolutionManager = () => {
   );
 };
 
-export default AdminResolutionManager;
+export default clone;
