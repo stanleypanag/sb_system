@@ -21,17 +21,11 @@ const Resolution = () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
+      const loggedInStatus = !!session;
 
-      if (session) {
-        setIsLoggedIn(true);
-      }
+      setIsLoggedIn(loggedInStatus);
+      setDownloadDisabler(loggedInStatus ? "" : "#toolbar=0");
     };
-
-    if (loggedIn) {
-      setDownloadDisabler("");
-    } else {
-      setDownloadDisabler("#toolbar=0");
-    }
 
     const fetchDocument = async () => {
       try {
