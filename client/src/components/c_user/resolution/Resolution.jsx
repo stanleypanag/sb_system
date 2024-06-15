@@ -12,6 +12,7 @@ const Resolution = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDocUrl, setCurrentDocUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [downloadDisabler, setDownloadDisabler] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,6 +26,12 @@ const Resolution = () => {
         setIsLoggedIn(true);
       }
     };
+
+    if (loggedIn) {
+      setDownloadDisabler("");
+    } else {
+      setDownloadDisabler("#toolbar=0");
+    }
 
     const fetchDocument = async () => {
       try {
@@ -141,11 +148,10 @@ const Resolution = () => {
                       <button
                         className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
                         type="button"
-                        disabled={!loggedIn}
                         onClick={() => openModal(item.doc_file_url)}
                       >
                         {/* USER IS LOGGED IN OR NOT */}
-                        {!loggedIn ? "Login to View" : "View Document"}
+                        View Document
                         <svg
                           className="flex-shrink-0 w-4 h-4"
                           xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +211,11 @@ const Resolution = () => {
               </button>
             </div>
             <div className="p-4 overflow-y-auto">
-              <iframe src={currentDocUrl} width="100%" height="500" />
+              <iframe
+                src={`${currentDocUrl}${downloadDisabler}`}
+                width="100%"
+                height="500"
+              />
             </div>
             <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
               <button
