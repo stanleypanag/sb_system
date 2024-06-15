@@ -102,7 +102,7 @@ const AdminDashboard = () => {
           {/* <!-- Card --> */}
           <div class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
             <div class="inline-flex justify-center items-center">
-              <span class="size-2 inline-block bg-gray-500 rounded-full me-2"></span>
+              <span class="size-2 inline-block bg-green-500 rounded-full me-2"></span>
               <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">
                 Users
               </span>
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
           {/* <!-- Card --> */}
           <div class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
             <div class="inline-flex justify-center items-center">
-              <span class="size-2 inline-block bg-green-500 rounded-full me-2"></span>
+              <span class="size-2 inline-block bg-blue-300 rounded-full me-2"></span>
               <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">
                 Ordinances
               </span>
@@ -136,7 +136,7 @@ const AdminDashboard = () => {
           {/* <!-- Card --> */}
           <div class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
             <div class="inline-flex justify-center items-center">
-              <span class="size-2 inline-block bg-red-500 rounded-full me-2"></span>
+              <span class="size-2 inline-block bg-yellow-100 rounded-full me-2"></span>
               <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">
                 Resolutions
               </span>

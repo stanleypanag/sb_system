@@ -20,13 +20,7 @@ const AdminPanel = () => {
           <AdminSidebar />
         </aside>
 
-        <main
-          style={{
-            backgroundImage:
-              "linear-gradient(to right top, #fcf6d6, #c0af9c, #806f68, #403737, #000000)",
-          }}
-          className="w-full overflow-y-auto"
-        >
+        <main className="w-full overflow-y-auto bg-gray-700">
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
             <Route
