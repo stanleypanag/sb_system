@@ -21,17 +21,11 @@ const Resolution = () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
+      const loggedInStatus = !!session;
 
-      if (session) {
-        setIsLoggedIn(true);
-      }
+      setIsLoggedIn(loggedInStatus);
+      setDownloadDisabler(loggedInStatus ? "" : "#toolbar=0");
     };
-
-    if (loggedIn) {
-      setDownloadDisabler("");
-    } else {
-      setDownloadDisabler("#toolbar=0");
-    }
 
     const fetchDocument = async () => {
       try {
@@ -210,7 +204,7 @@ const Resolution = () => {
                 </svg>
               </button>
             </div>
-            <div className="p-4 overflow-y-auto">
+            <div className="p-4 overflow-y-auto flex justify-center">
               <iframe
                 src={`${currentDocUrl}${downloadDisabler}`}
                 width="100%"
