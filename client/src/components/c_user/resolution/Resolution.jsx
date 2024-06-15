@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { supabase } from "../../../supabase/supabase";
+import { useLocation } from "react-router-dom";
 import boyerMooreSearch from "../algorithm/boyerMoore";
 import "./resolution.css";
 
 const Resolution = () => {
-  const [search, setSearch] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchValue = searchParams.get("search");
+  const [search, setSearch] = useState(searchValue);
   const [responseData, setResponseData] = useState([]);
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -61,7 +65,10 @@ const Resolution = () => {
   useEffect(() => {
     const filterData = () => {
       const filtered = responseData.filter((item) => {
-        const searchLower = search.toLowerCase();
+        const searchLower =
+          typeof search === "string" && search.trim().length > 0
+            ? search.toLowerCase()
+            : "";
         const yearString = String(item.doc_series_yr);
         const resolutionNumberLower = String(item.doc_number);
         const titleLower = item.doc_title.toLowerCase();
@@ -109,6 +116,7 @@ const Resolution = () => {
               placeholder="search by [resolution number, title, year]"
               id="search-input"
               className="py-3 px-4 block w-full border-2 border-gray-900 text-sm dark:bg-white dark:border-gray-700 dark:text-black"
+              value={search}
             />
           </div>
 

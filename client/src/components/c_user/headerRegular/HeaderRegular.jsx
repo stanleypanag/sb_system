@@ -6,9 +6,10 @@ import "./headerRegular.css";
 
 const HeaderRegular = () => {
   const navigate = useNavigate();
-
   const [userEmail, setUserEmail] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [docType, setDocType] = useState("Resolution");
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -57,6 +58,22 @@ const HeaderRegular = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleDocTypeChange = (e) => {
+    setDocType(e.target.value);
+  };
+
+  const handleSearch = () => {
+    if (docType === "Resolution") {
+      navigate(`/resolution?search=${searchValue}`);
+    } else if (docType === "Ordinance") {
+      navigate(`/ordinance?search=${searchValue}`);
+    }
   };
 
   return (
@@ -152,10 +169,16 @@ const HeaderRegular = () => {
                   <input
                     className="search input w-[17rem] join-item bg-gray-200"
                     placeholder="eg.,year, title, reso no., ord. no."
+                    value={searchValue}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
-              <select className="select join-item w-25 bg-gray-800 text-white focus:outline-none">
+              <select
+                className="select join-item w-25 bg-gray-800 text-white focus:outline-none"
+                value={docType}
+                onChange={handleDocTypeChange}
+              >
                 <option
                   disabled
                   className="text-white font-bold dark:text-white"
@@ -166,7 +189,10 @@ const HeaderRegular = () => {
                 <option className="text-gray-200">Ordinance</option>
               </select>
               <div className="indicator">
-                <button className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border-0">
+                <button
+                  className="btn join-item bg-gray-800 hover:bg-gray-600 text-white border-0"
+                  onClick={handleSearch}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"

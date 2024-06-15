@@ -111,31 +111,35 @@ const RecentDocs = () => {
                       S.Y. {item.doc_series_yr}
                     </p>
                   </div>
-                  <div className="p-4 md:p-5">
-                    <h3 className="text-sm font-light text-gray-600 text-justify">
-                      {item.doc_title}
-                    </h3>
-                    <button
-                      className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
-                      type="button"
-                      onClick={() => openModal(item.doc_file_url)}
-                    >
-                      View Document
-                      <svg
-                        className="flex-shrink-0 w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                  <div className="p-4 md:p-5 flex flex-col">
+                    <div className="h-[12vh] overflow-hidden">
+                      <h3 className="text-sm font-light text-gray-600 text-justify line-clamp-4">
+                        {item.doc_title}
+                      </h3>
+                    </div>
+                    <div className="mt-auto">
+                      <button
+                        className="inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
+                        type="button"
+                        onClick={() => openModal(item.doc_file_url)}
                       >
-                        <path d="m9 18 6-6-6-6" />
-                      </svg>
-                    </button>
+                        View Document
+                        <svg
+                          className="flex-shrink-0 w-4 h-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m9 18 6-6-6-6" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))
