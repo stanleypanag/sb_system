@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Error from "../../../../assets/Error.png";
+import Close from "../../../../assets/Close.png";
 
 const AdminResolutionManager = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingResolution, setEditingResolution] = useState(null);
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({});
+
+  //pdf modal viewer
+  const [selectedPdfUrl, setSelectedPdfUrl] = useState(null);
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
   const {
     isLoading,
@@ -37,7 +42,7 @@ const AdminResolutionManager = () => {
       formDataToSend.append("doc_number", formData.doc_number);
       formDataToSend.append("doc_series_yr", formData.doc_series_yr);
       formDataToSend.append("doc_title", formData.doc_title);
-      formDataToSend.append("doc_file_path", formData.doc_file_path);
+      formDataToSend.append("doc_pdf", formData.doc_pdf);
 
       console.log(formData);
       console.log("Request payload:", formDataToSend);
@@ -85,6 +90,16 @@ const AdminResolutionManager = () => {
     e.preventDefault();
     mutate(formData);
     handleClose();
+  };
+
+  // PDF modal Handler
+  const handleOpenPdfModal = (pdfUrl) => {
+    setSelectedPdfUrl(pdfUrl);
+    setIsPdfModalOpen(true);
+  };
+  const handleClosePdfModal = () => {
+    setSelectedPdfUrl(null);
+    setIsPdfModalOpen(false);
   };
 
   if (isLoading) {
@@ -205,7 +220,16 @@ const AdminResolutionManager = () => {
                           {resolution.doc_series_yr}
                         </td>
                         <td className="py-4 whitespace-nowrap text-wrap text-sm text-gray-800">
-                          {resolution.doc_file_name}
+                          <a
+                            href="#"
+                            className="text-blue-600 hover:text-blue-800 underline"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleOpenPdfModal(resolution.doc_file_url);
+                            }}
+                          >
+                            {resolution.doc_file_name}
+                          </a>
                         </td>
                         <td className="px-6 flex gap-3 whitespace-nowrap justify-end">
                           <button
@@ -327,10 +351,10 @@ const AdminResolutionManager = () => {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          doc_file_path: e.target.files[0],
+                          doc_pdf: e.target.files[0],
                         })
                       }
-                      name="doc_file_path"
+                      name="doc_pdf"
                       id="small-file-input"
                       className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
                     />
@@ -353,6 +377,36 @@ const AdminResolutionManager = () => {
               >
                 Save changes
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isPdfModalOpen && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center">
+          <div className="bg-white border shadow-sm rounded-xl w-[80vw] p-4 m-3">
+            <div className="flex justify-between items-center py-3 px-4 border-b">
+              <h3 className="font-bold text-gray-800">View PDF</h3>
+              <button
+                type="button"
+                className="flex justify-center items-center size-7 text-sm font-semibold text-gray-800 disabled:opacity-50 disabled:pointer-events-none mr-10"
+                onClick={handleClosePdfModal}
+              >
+                <p className="text-red-500">Close</p>
+                <img src={Close} />
+              </button>
+            </div>
+            <div className="p-4">
+              {selectedPdfUrl && (
+                <object
+                  data={selectedPdfUrl}
+                  type="application/pdf"
+                  className="w-full h-[80vh]"
+                  title="PDF Viewer"
+                >
+                  <p>Document PDF not Available!</p>
+                </object>
+              )}
             </div>
           </div>
         </div>

@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { supabase } from "../../../supabase/supabase";
+import { useLocation } from "react-router-dom";
 import boyerMooreSearch from "../algorithm/boyerMoore";
 import "./ordinance.css";
 
 const Resolution = () => {
-  const [search, setSearch] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchValue = searchParams.get("search");
+  const [search, setSearch] = useState(searchValue);
   const [responseData, setResponseData] = useState([]);
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDocUrl, setCurrentDocUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [downloadDisabler, setDownloadDisabler] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,10 +25,10 @@ const Resolution = () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
+      const loggedInStatus = !!session;
 
-      if (session) {
-        setIsLoggedIn(true);
-      }
+      setIsLoggedIn(loggedInStatus);
+      setDownloadDisabler(loggedInStatus ? "" : "#toolbar=0");
     };
 
     const fetchDocument = async () => {
@@ -60,7 +65,10 @@ const Resolution = () => {
   useEffect(() => {
     const filterData = () => {
       const filtered = responseData.filter((item) => {
-        const searchLower = search.toLowerCase();
+        const searchLower =
+          typeof search === "string" && search.trim().length > 0
+            ? search.toLowerCase()
+            : "";
         const yearString = String(item.doc_series_yr);
         const ordinanceNumberLower = String(item.doc_number);
         const titleLower = item.doc_title.toLowerCase();
@@ -108,6 +116,7 @@ const Resolution = () => {
               placeholder="search by [resolution number, title, year]"
               id="search-input"
               className="py-3 px-4 block w-full border-2 border-gray-900 text-sm dark:bg-white dark:border-gray-700 dark:text-black"
+              value={search}
             />
           </div>
 
@@ -141,10 +150,9 @@ const Resolution = () => {
                       <button
                         className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
                         type="button"
-                        disabled={!loggedIn}
                         onClick={() => openModal(item.doc_file_url)}
                       >
-                        {!loggedIn ? "Login to View" : "View Document"}
+                        View Document
                         <svg
                           className="flex-shrink-0 w-4 h-4"
                           xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +212,11 @@ const Resolution = () => {
               </button>
             </div>
             <div className="p-4 overflow-y-auto">
-              <iframe src={currentDocUrl} width="100%" height="500" />
+              <iframe
+                src={`${currentDocUrl}${downloadDisabler}`}
+                width="100%"
+                height="500"
+              />
             </div>
             <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
               <button
