@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../../../supabase/supabase";
+import axios from "axios";
 import "./recentDocs.css";
 
 const RecentDocs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
-  const [resolutionData, setResolutionData] = useState([]);
+  const [responseData, setResponseData] = useState([]);
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentDocUrl, setCurrentDocUrl] = useState(null);
 
   useEffect(() => {
     setIsDropdownOpen(false);
@@ -15,6 +18,8 @@ const RecentDocs = () => {
 
   // NEW
   useEffect(() => {
+    setIsLoading(true);
+
     const fetchSession = async () => {
       const {
         data: { session },
@@ -25,41 +30,22 @@ const RecentDocs = () => {
       }
     };
 
-    const fetchData = async () => {
-      setIsLoading(true); // Set loading to true when fetching data
-
+    const fetchDocument = async () => {
       try {
-        // Simulate delay with setTimeout (remove in production)
-        const { data, error } = await supabase
-          .from("document")
-          .select("*")
-          .order("created_at", { ascending: false }) // Adjust the field name if necessary
-          .limit(3);
-
-        if (error) {
-          console.error("Error fetching data:", error);
-          setResolutionData([]);
-        } else if (!data || data.length === 0) {
-          console.log("No data found");
-          setResolutionData([]);
-        } else {
-          console.log("Data fetched:", data);
-          setResolutionData(data);
-        }
-
-        setIsLoading(false); // Set loading to false after data fetching completes
-        // Simulated delay of 2000 milliseconds (2 seconds)
+        const response = await axios.get(
+          "http://192.168.1.10:5000/api/documents"
+        );
+        setResponseData(response.data.data.slice(0, 3));
+        console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setResolutionData([]);
-        setIsLoading(false); // Ensure loading state is turned off even on error
       }
     };
 
     const fetchDataWithDelay = () => {
       setTimeout(() => {
         fetchSession();
-        fetchData();
+        fetchDocument();
         setIsLoading(false); // Set loading to false after data fetching is complete
       }, 1000); // Simulate 1 seconds loading delay
     };
@@ -75,27 +61,18 @@ const RecentDocs = () => {
     };
   }, []);
 
-  // NEW
-  const handleViewDocument = async (documentId) => {
-    const bucketName = "pdf-bucket";
-    const filePath = `RESOLUTION/${documentId}`;
-
-    const { data, error } = await supabase.storage
-      .from(bucketName)
-      .createSignedUrl(filePath, 60); // 60 seconds expiration
-
-    if (error) {
-      console.error(error);
-      return;
-    }
-    const pdfUrl = data.signedUrl;
-
-    window.open(pdfUrl, "_blank");
-  };
-
-  // NEW
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
+  };
+
+  const openModal = (docUrl) => {
+    setCurrentDocUrl(docUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setCurrentDocUrl(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -117,10 +94,10 @@ const RecentDocs = () => {
                 </h1>
                 <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-white"></div>
               </div>
-            ) : resolutionData.length === 0 ? (
+            ) : responseData.length === 0 ? (
               <p className="text-center text-white "></p>
             ) : (
-              resolutionData.map((item) => (
+              responseData.map((item) => (
                 <div
                   className="flex flex-col bg-white shadow-sm rounded-tl-xl rounded-tr-xl rounded-bl-lg rounded-br-lg"
                   key={item.doc_id}
@@ -140,7 +117,7 @@ const RecentDocs = () => {
                     <button
                       className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none"
                       type="button"
-                      onClick={() => handleViewDocument(item.doc_file_name)}
+                      onClick={() => openModal(item.doc_file_url)}
                       disabled={!loggedIn}
                     >
                       {!loggedIn ? "Login to View" : "View Document"}
@@ -215,6 +192,55 @@ const RecentDocs = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-lg overflow-hidden max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center py-3 px-4 border-b">
+              <h3 className="font-bold text-gray-700 uppercase">
+                Resolution Document Viewer
+              </h3>
+              <button
+                type="button"
+                className="text-gray-800 hover:bg-gray-100 rounded-full p-2"
+                onClick={closeModal}
+              >
+                <svg
+                  className="w-6 h-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto">
+              <iframe src={currentDocUrl} width="100%" height="500" />
+            </div>
+            <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
+              <button
+                type="button"
+                className="py-2 px-3 text-sm font-medium rounded-lg border border-gray-200 bg-gray-400 text-gray-800 hover:bg-gray-50"
+                onClick={closeModal}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
