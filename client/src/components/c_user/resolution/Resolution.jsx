@@ -212,7 +212,7 @@ const Resolution = () => {
                 </svg>
               </button>
             </div>
-            <div className="p-4 overflow-y-auto flex justify-center">
+            <div className="p-4 overflow-y-visble flex justify-center">
               <iframe
                 src={`${currentDocUrl}${downloadDisabler}`}
                 width="100%"

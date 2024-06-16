@@ -1,38 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { supabase } from "../../../../../supabase/supabase";
+import React, { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const AdminUserManager = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [editingUserRole, setEditingUserRole] = useState(null);
+  const [formData, setFormData] = useState({});
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const { data, error } = await supabase.from("users").select("*");
-
-        if (error) {
-          console.error("Error fetching data:", error);
-          setUsers([]);
-        } else {
-          console.log("Fetched users:", data); // Log fetched users for debugging
-          setUsers(data);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setUsers([]);
+  // Fetch all users
+  const {
+    isLoading,
+    error,
+    data: users,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const response = await fetch("http://192.168.1.10:5000/api/users");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    };
+      return response.json();
+    },
+  });
 
-    fetchUsers();
-  }, []);
+  // Mutation for updating user role
+  const updateRoleMutation = useMutation({
+    mutationFn: async ({ userId, isAdmin }) => {
+      const formDataToSend = new FormData();
+      formDataToSend.append("user_id", userId);
+      formDataToSend.append("is_admin", isAdmin);
 
-  const handleOpenModal = () => {
+      const response = await fetch(
+        `http://192.168.1.10:5000/api/users/${userId}`,
+        {
+          method: "PUT",
+          body: formDataToSend,
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update user role");
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
+      setEditingUserRole(null);
+      setIsModalOpen(false);
+    },
+    onError: (error) => {
+      console.error("Error updating user role:", error);
+      alert(
+        "An error occurred while updating user role. Please try again later."
+      );
+    },
+  });
+
+  // Handle modal open
+  const handleOpenModal = (user) => {
+    setEditingUserRole(user);
+    setFormData({ user_id: user.user_id, is_admin: user.is_admin });
     setIsModalOpen(true);
   };
 
+  // Handle modal close
   const handleCloseModal = () => {
+    setEditingUserRole(null);
     setIsModalOpen(false);
   };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateRoleMutation.mutate({
+      userId: formData.user_id,
+      isAdmin: e.target.elements.is_admin.checked,
+    });
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
 
   return (
     <div className="p-20">
@@ -97,7 +143,7 @@ const AdminUserManager = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {users.map((user) => (
+                    {users.data.map((user) => (
                       <tr key={user.user_id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                           {user.email}
@@ -117,7 +163,7 @@ const AdminUserManager = () => {
                           <button
                             type="button"
                             className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
-                            onClick={handleOpenModal}
+                            onClick={() => handleOpenModal(user)}
                           >
                             Edit
                           </button>
@@ -134,12 +180,12 @@ const AdminUserManager = () => {
 
       {isModalOpen && (
         <div
-          id="hs-modal-editResolution"
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-gray-950/90"
+          id="hs-modal-editUser"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-green-950/90"
         >
           <div className="bg-white border shadow-sm rounded-xl w-full max-w-lg p-4 m-3">
             <div className="flex justify-between items-center py-3 px-4 border-b">
-              <h3 className="font-bold text-gray-800">Edit Resolution</h3>
+              <h3 className="font-bold text-gray-800">Edit User Role</h3>
               <button
                 type="button"
                 className="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
@@ -164,50 +210,57 @@ const AdminUserManager = () => {
               </button>
             </div>
             <div className="p-4 overflow-y-auto">
-              <form>
-                <div className="grid sm:grid-cols-2 gap-2">
-                  <label
-                    htmlFor="hs-radio-in-form"
-                    className="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="hidden"
+                  value={formData.user_id}
+                  name="user_id"
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      user_id: e.target.value,
+                    })
+                  }
+                  className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                  placeholder="Edit Series Year"
+                />
+                <input
+                  type="hidden"
+                  value={formData.email}
+                  name="email"
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      email: e.target.value,
+                    })
+                  }
+                  className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                  placeholder="Edit Series Year"
+                />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="is_admin"
+                    defaultChecked={editingUserRole.is_admin}
+                  />
+                  Is Admin
+                </label>
+                <div className="mt-4 flex justify-end gap-x-2">
+                  <button
+                    type="button"
+                    className="py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-semibold bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 transition-all text-sm"
+                    onClick={handleCloseModal}
                   >
-                    <input
-                      type="radio"
-                      name="hs-radio-in-form"
-                      className="shrink-0 mt-0.5 border border-gray-800 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                      id="hs-radio-in-form"
-                    />
-                    <span className="text-sm text-gray-500 ms-3">false</span>
-                  </label>
-
-                  <label
-                    htmlFor="hs-radio-checked-in-form"
-                    className="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white shadow-sm align-middle hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 transition-all text-sm"
                   >
-                    <input
-                      type="radio"
-                      name="hs-radio-in-form"
-                      className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                      id="hs-radio-checked-in-form"
-                    />
-                    <span className="text-sm text-gray-500 ms-3">true</span>
-                  </label>
+                    Save changes
+                  </button>
                 </div>
               </form>
-            </div>
-            <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
-              <button
-                type="button"
-                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                onClick={handleCloseModal}
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-              >
-                Save changes
-              </button>
             </div>
           </div>
         </div>

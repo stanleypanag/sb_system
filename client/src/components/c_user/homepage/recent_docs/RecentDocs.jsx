@@ -231,7 +231,7 @@ const RecentDocs = () => {
               </button>
             </div>
             <div className="p-4 overflow-y-visble flex justify-center">
-              <embed
+              <iframe
                 src={`${currentDocUrl}${downloadDisabler}`}
                 width="100%"
                 height="500"
