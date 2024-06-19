@@ -33,9 +33,7 @@ const RecentDocs = () => {
 
     const fetchDocument = async () => {
       try {
-        const response = await axios.get(
-          "http://192.168.1.10:5000/api/documents"
-        );
+        const response = await axios.get("http://localhost:5000/api/documents");
         setResponseData(response.data.data.slice(0, 3));
         console.log(response.data.data);
       } catch (error) {

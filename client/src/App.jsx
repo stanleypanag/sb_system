@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Admin, User } from "./loader/index";
 import { supabase } from "../src/supabase/supabase.js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,7 +47,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       {isAuthenticated ? (
         isAdmin ? (
           <Admin />
@@ -54,7 +57,7 @@ const App = () => {
       ) : (
         <User value={false} />
       )}
-    </div>
+    </QueryClientProvider>
   );
 };
 
