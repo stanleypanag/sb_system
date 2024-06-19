@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Error from "../../../../assets/Error.png";
 import Close from "../../../../assets/Close.png";
 
+const LOCAL_IP = import.meta.env.VITE_LOCAL_IP;
+
 const AdminResolutionManager = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingResolution, setEditingResolution] = useState(null);
@@ -20,14 +22,14 @@ const AdminResolutionManager = () => {
   } = useQuery({
     queryKey: ["documents", "resolutions"],
     queryFn: () =>
-      fetch("http://192.168.1.10:5000/api/documents/resolution/").then((res) =>
+      fetch(`http://${LOCAL_IP}:5000/api/documents/resolution/`).then((res) =>
         res.json()
       ),
   });
 
   const deleteResolutionMutation = useMutation({
     mutationFn: (docId) =>
-      fetch(`http://192.168.1.10:5000/api/documents/${docId}`, {
+      fetch(`http://${LOCAL_IP}:5000/api/documents/${docId}`, {
         method: "DELETE",
       }),
     onSuccess: () => {
@@ -47,7 +49,7 @@ const AdminResolutionManager = () => {
       console.log(formData);
       console.log("Request payload:", formDataToSend);
       return fetch(
-        `http://192.168.1.10:5000/api/documents/${editingResolution.doc_id}`,
+        `http://${LOCAL_IP}:5000/api/documents/${editingResolution.doc_id}`,
         {
           method: "PUT",
           body: formDataToSend,
@@ -118,7 +120,7 @@ const AdminResolutionManager = () => {
           <h1 className="text-white text-xl mr-5 font-bold">
             Error Loading Data!
           </h1>
-          <p>Can't reach the server!</p>
+          <p className="text-gray-500">Can't reach the server!</p>
         </div>
       </div>
     );
@@ -133,7 +135,8 @@ const AdminResolutionManager = () => {
               <h1 className="text-gray-200">RESOLUTION TABLE MANAGER</h1>
             </div>
             <div className="divide-y bg-white divide-gray-200">
-              <div className="py-3 px-4">
+              {/* SEARCH FEATURE */}
+              {/* <div className="py-3 px-4">
                 <div className="relative max-w-xs">
                   <label className="sr-only">Search</label>
                   <input
@@ -161,7 +164,7 @@ const AdminResolutionManager = () => {
                     </svg>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="overflow-hidden">
                 <table className="min-w-full divide-y divide-gray-200 ">
                   <thead className="bg-gray-50 ">

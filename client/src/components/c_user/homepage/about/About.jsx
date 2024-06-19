@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Phone from "../../../assets/phone.png";
 import Email from "../../../assets/email.png";
 import Facebook from "../../../assets/facebook.png";
@@ -10,6 +10,7 @@ const About = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [emailPlaceHolder, setEmailPlaceholder] = useState("");
   const [textAreaPlaceHolder, setTextAreaPlaceholder] = useState("");
+  const formRef = useRef(null);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -37,6 +38,39 @@ const About = () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(formRef.current);
+    const message = formData.get("message");
+
+    if (userEmail && message) {
+      try {
+        const { data, error } = await supabase
+          .from("emails")
+          .insert([{ email_address: userEmail, message: message }], {
+            returning: "representation", // Add this line to return the inserted data
+          });
+
+        if (error) {
+          console.error("Error inserting message:", error);
+          alert(
+            "An error occurred while sending your message. Please try again."
+          );
+        } else {
+          console.log("Message sent successfully!");
+          formRef.current.reset(); // Reset form fields after successful submission
+        }
+      } catch (error) {
+        console.error("Error inserting message:", error);
+        alert(
+          "An error occurred while sending your message. Please try again."
+        );
+      }
+    } else {
+      alert("Please fill in both the email and message fields.");
+    }
+  };
 
   return (
     <>
@@ -108,9 +142,10 @@ const About = () => {
                     <img src={Email} className="w-7" />
                     <a
                       className="text-gray-800"
+                      target="_blank"
                       href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKhbmGvwHKZhbhKNlLWKgdQNkCMkBlDHlmSlnvlNxTGNFXGnXMMhpbCbkdZMQCpmQFzzKdD"
                     >
-                      mayorjun.naic@gmail.com
+                      municipal.sb.naic@gmail.com
                     </a>
                   </div>
                   <div className="icon flex">
@@ -118,6 +153,8 @@ const About = () => {
                     <a
                       className="text text-gray-800"
                       href="https://www.facebook.com/municipalityofnaic"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Municipality of Naic
                     </a>
@@ -174,7 +211,7 @@ const About = () => {
             </g>
           </svg>
         </div>
-        <form noValidate="" className="space-y-6">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="text-sm text-white">
               Email
@@ -186,6 +223,7 @@ const About = () => {
               placeholder={emailPlaceHolder}
               className="w-full p-3 rounded border border-gray-400 bg-gray-300 text-gray-800"
               disabled={isDisabled}
+              readOnly
             />
           </div>
           <div>
@@ -194,6 +232,7 @@ const About = () => {
             </label>
             <textarea
               id="message"
+              name="message"
               rows="4"
               placeholder={textAreaPlaceHolder}
               className="w-full p-3 rounded border border-gray-400 bg-gray-300 text-gray-500"
