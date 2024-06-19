@@ -44,19 +44,22 @@ const RegisterPage = () => {
 
       if (error) {
         setError(error.message);
-      } else if (user) {
+      } else {
         // Extract the verification token from the session object
-        const verificationToken =
-          session?.data.session?.user.confirmation_token;
+
+        //OLD ONE===========================================
+        // const verificationToken =
+        //   session?.data.session?.user.confirmation_token;
+        //=================================================
+
+        const token_to_verify = session?.data?.user?.confirmation_token;
 
         // Update the verificationToken state with the extracted token
-        setVerificationToken(verificationToken);
+        setVerificationToken(token_to_verify);
 
         setSuccess(
           `A verification email has been sent to ${email}. Please check your inbox and click on the verification link to complete your registration.`
         );
-      } else {
-        setError("Something went wrong during sign-up. Please try again.");
       }
     } catch (error) {
       setError(error.message);
@@ -231,7 +234,7 @@ const RegisterPage = () => {
                             className="text-black py-3 px-4 block w-full border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             aria-describedby="confirm-password-error"
                           />
-                          <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                          <div className="hidden absolute inset-y-0 end-0 items-center pointer-events-none pe-3">
                             <svg
                               className="h-5 w-5 text-gray-500"
                               width="16"

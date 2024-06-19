@@ -52,8 +52,9 @@ const Footer = () => {
                 <li>
                   <a
                     className="text-gray-500"
+                    target="_blank"
                     rel="noopener noreferrer"
-                    href="#"
+                    href="https://www.facebook.com/municipalityofnaic"
                   >
                     Sangguniang Bayan
                   </a>
@@ -65,7 +66,8 @@ const Footer = () => {
               <div className="flex justify-start space-x-3">
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://www.facebook.com/municipalityofnaic"
+                  target="_blank"
                   title="Facebook"
                   className="flex items-center p-1"
                 >

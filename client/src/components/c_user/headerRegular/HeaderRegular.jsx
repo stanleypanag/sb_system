@@ -129,9 +129,6 @@ const HeaderRegular = () => {
                     className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52 divide-y-2"
                   >
                     <li>
-                      <a>Settings</a>
-                    </li>
-                    <li>
                       <a onClick={handleLogout}>Logout</a>
                     </li>
                   </ul>
@@ -303,9 +300,6 @@ const HeaderRegular = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                   >
-                    <li>
-                      <a className="text-gray-900 text-xs">Settings</a>
-                    </li>
                     <li>
                       <a
                         className="text-gray-900 text-xs"

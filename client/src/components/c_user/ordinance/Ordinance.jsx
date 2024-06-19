@@ -34,7 +34,7 @@ const Resolution = () => {
     const fetchDocument = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.1.10:5000/api/documents/ordinance/"
+          "http://localhost:5000/api/documents/ordinance/"
         );
         setResponseData(response.data.data);
         console.log(response.data.data);
