@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import boyerMooreSearch from "../algorithm/boyerMoore";
 import "./ordinance.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Resolution = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -34,7 +36,7 @@ const Resolution = () => {
     const fetchDocument = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/documents/ordinance/"
+          ` ${BASE_URL}/api/documents/ordinance/`
         );
         setResponseData(response.data.data);
         console.log(response.data.data);
