@@ -4,6 +4,8 @@ import { supabase } from "../../../../supabase/supabase";
 import axios from "axios";
 import "./recentDocs.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const RecentDocs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [responseData, setResponseData] = useState([]);
@@ -33,7 +35,7 @@ const RecentDocs = () => {
 
     const fetchDocument = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/documents");
+        const response = await axios.get(`${BASE_URL}/api/documents`);
         setResponseData(response.data.data.slice(0, 3));
         console.log(response.data.data);
       } catch (error) {

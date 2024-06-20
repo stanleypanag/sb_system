@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Error from "../../../../assets/Error.png";
 import Close from "../../../../assets/Close.png";
 
-const LOCAL_IP = import.meta.env.VITE_LOCAL_IP;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const AdminOrdinanceManager = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,14 +22,12 @@ const AdminOrdinanceManager = () => {
   } = useQuery({
     queryKey: ["documents", "ordinances"],
     queryFn: () =>
-      fetch(`http://${LOCAL_IP}:5000/api/documents/ordinance/`).then((res) =>
-        res.json()
-      ),
+      fetch(`${BASE_URL}/api/documents/ordinance/`).then((res) => res.json()),
   });
 
   const deleteOrdinanceMutation = useMutation({
     mutationFn: (docId) =>
-      fetch(`http://${LOCAL_IP}:5000/api/documents/${docId}`, {
+      fetch(`${BASE_URL}/api/documents/${docId}`, {
         method: "DELETE",
       }),
     onSuccess: () => {
@@ -48,13 +46,10 @@ const AdminOrdinanceManager = () => {
 
       console.log(formData);
       console.log("Request payload:", formDataToSend);
-      return fetch(
-        `http://${LOCAL_IP}:5000/api/documents/${editingOrdinance.doc_id}`,
-        {
-          method: "PUT",
-          body: formDataToSend,
-        }
-      );
+      return fetch(`${BASE_URL}/api/documents/${editingOrdinance.doc_id}`, {
+        method: "PUT",
+        body: formDataToSend,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["documents", "ordinances"]);
