@@ -1,26 +1,8 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "src/index.js",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "build"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
-    ],
-    "env": {
-      "VITE_SUPABASE_URL": "https://gvaxacclaoxozsslobxf.supabase.co",
-      "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXhhY2NsYW94b3pzc2xvYnhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgxMjQxNjYsImV4cCI6MjAzMzcwMDE2Nn0.yRqdejst7OKWYhO19QuLP7jSU2vIcy6sA_F6BWAc1LM",
-      "VITE_PDF_SERVICES_CLIENT_ID": "d3bf00880f6c4ab1873ad05c5d3b08f8",
-      "VITE_PDF_SERVICES_CLIENT_SECRET": "p8e-14hc7P-tMF-p8IES7Xi-0FXHEMHC7Jn9",
-      "VITE_BASE_URL": "http://localhost:5000"
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
-  }
-  
+  ]
+}
