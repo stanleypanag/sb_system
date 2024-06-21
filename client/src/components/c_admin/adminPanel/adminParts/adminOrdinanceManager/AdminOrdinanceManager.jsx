@@ -22,14 +22,14 @@ const AdminOrdinanceManager = () => {
   } = useQuery({
     queryKey: ["documents", "ordinances"],
     queryFn: () =>
-      fetch(`http://${BASE_URL}/api/documents/ordinance/`).then((res) =>
+      fetch(`https://${BASE_URL}/api/documents/ordinance/`).then((res) =>
         res.json()
       ),
   });
 
   const deleteOrdinanceMutation = useMutation({
     mutationFn: (docId) =>
-      fetch(`http://${BASE_URL}/api/documents/${docId}`, {
+      fetch(`https://${BASE_URL}/api/documents/${docId}`, {
         method: "DELETE",
       }),
     onSuccess: () => {
@@ -49,7 +49,7 @@ const AdminOrdinanceManager = () => {
       console.log(formData);
       console.log("Request payload:", formDataToSend);
       return fetch(
-        `http://${BASE_URL}/api/documents/${editingOrdinance.doc_id}`,
+        `https://${BASE_URL}/api/documents/${editingOrdinance.doc_id}`,
         {
           method: "PUT",
           body: formDataToSend,

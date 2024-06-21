@@ -20,12 +20,12 @@ const AdminEventLogs = () => {
   } = useQuery({
     queryKey: ["events", "eventLogs"],
     queryFn: () =>
-      fetch(`http://${BASE_URL}/api/event-logs`).then((res) => res.json()),
+      fetch(`https://${BASE_URL}/api/event-logs`).then((res) => res.json()),
   });
 
   const deleteEventMutation = useMutation({
     mutationFn: (id) =>
-      fetch(`http://${BASE_URL}/api/event-logs/${id}`, {
+      fetch(`https://${BASE_URL}/api/event-logs/${id}`, {
         method: "DELETE",
       }),
     onSuccess: () => {

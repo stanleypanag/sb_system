@@ -26,12 +26,12 @@ const AdminUserManager = () => {
   } = useQuery({
     queryKey: ["usersManage", "fetchedUsers"],
     queryFn: () =>
-      fetch(`http://${BASE_URL}/api/users/`).then((res) => res.json()),
+      fetch(`https://${BASE_URL}/api/users/`).then((res) => res.json()),
   });
 
   const deleteUserMutation = useMutation({
     mutationFn: (id) =>
-      fetch(`http://${BASE_URL}/api/users/${id}`, {
+      fetch(`https://${BASE_URL}/api/users/${id}`, {
         method: "DELETE",
       }),
     onSuccess: () => {
@@ -41,7 +41,7 @@ const AdminUserManager = () => {
 
   const updateUserMutation = useMutation({
     mutationFn: ({ id, is_admin }) =>
-      fetch(`http://${BASE_URL}/api/users/${id}`, {
+      fetch(`https://${BASE_URL}/api/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const AdminUserManager = () => {
       // current_user_id: currentUserId,
     };
     if (requestData) {
-      fetch(`${URLDOMAIN}/api/users/${selectedUser.user_id}`, {
+      fetch(`https://${BASE_URL}/api/users/${selectedUser.user_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
