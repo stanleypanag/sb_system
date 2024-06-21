@@ -29,6 +29,9 @@ const LoginPage = () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
+        options: {
+          redirectTo: "/", // Redirect to dashboard page
+        },
       });
 
       if (error) {
