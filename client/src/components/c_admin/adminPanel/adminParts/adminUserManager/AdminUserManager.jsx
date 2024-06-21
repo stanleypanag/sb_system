@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 //props
 import SuccessBanner from "../adminUtils/SuccessBanner";
 import PasswordInput from "../adminUtils/PasswordInput";
@@ -24,12 +26,12 @@ const AdminUserManager = () => {
   } = useQuery({
     queryKey: ["usersManage", "fetchedUsers"],
     queryFn: () =>
-      fetch("http://localhost:5000/api/users/").then((res) => res.json()),
+      fetch(`http://${BASE_URL}/api/users/`).then((res) => res.json()),
   });
 
   const deleteUserMutation = useMutation({
     mutationFn: (id) =>
-      fetch(`http://localhost:5000/api/users/${id}`, {
+      fetch(`http://${BASE_URL}/api/users/${id}`, {
         method: "DELETE",
       }),
     onSuccess: () => {
@@ -39,7 +41,7 @@ const AdminUserManager = () => {
 
   const updateUserMutation = useMutation({
     mutationFn: ({ id, is_admin }) =>
-      fetch(`http://localhost:5000/api/users/${id}`, {
+      fetch(`http://${BASE_URL}/api/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -59,9 +61,10 @@ const AdminUserManager = () => {
     const requestData = {
       email: formData.email,
       pass: formData.pass,
+      // current_user_id: currentUserId,
     };
     if (requestData) {
-      fetch(`http://localhost:5000/api/users/${selectedUser.user_id}`, {
+      fetch(`${URLDOMAIN}/api/users/${selectedUser.user_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
