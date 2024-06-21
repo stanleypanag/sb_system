@@ -22,12 +22,14 @@ const AdminResolutionManager = () => {
   } = useQuery({
     queryKey: ["documents", "resolutions"],
     queryFn: () =>
-      fetch(`${BASE_URL}/api/documents/resolution/`).then((res) => res.json()),
+      fetch(`http://${BASE_URL}/api/documents/resolution/`).then((res) =>
+        res.json()
+      ),
   });
 
   const deleteResolutionMutation = useMutation({
     mutationFn: (docId) =>
-      fetch(`${BASE_URL}/api/documents/${docId}`, {
+      fetch(`http://${BASE_URL}/api/documents/${docId}`, {
         method: "DELETE",
       }),
     onSuccess: () => {
@@ -46,10 +48,13 @@ const AdminResolutionManager = () => {
 
       console.log(formData);
       console.log("Request payload:", formDataToSend);
-      return fetch(`${BASE_URL}/api/documents/${editingResolution.doc_id}`, {
-        method: "PUT",
-        body: formDataToSend,
-      });
+      return fetch(
+        `http://${BASE_URL}/api/documents/${editingResolution.doc_id}`,
+        {
+          method: "PUT",
+          body: formDataToSend,
+        }
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["documents", "resolutions"]);

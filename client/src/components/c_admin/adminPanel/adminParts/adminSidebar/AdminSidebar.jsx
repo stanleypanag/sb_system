@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Users from "../../../../assets/Users.png";
 import Dashboard from "../../../../assets/Dashboard.png";
 import Docs from "../../../../assets/Docs.png";
@@ -11,6 +11,7 @@ import { supabase } from "../../../../../supabase/supabase.js";
 
 const AdminSidebar = () => {
   const [userEmail, setUserEmail] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -38,7 +39,7 @@ const AdminSidebar = () => {
   const handleSignOut = async () => {
     try {
       await supabase.auth.signOut();
-      window.location.href = "/login";
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
