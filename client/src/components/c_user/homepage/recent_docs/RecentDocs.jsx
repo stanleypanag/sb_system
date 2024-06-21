@@ -35,9 +35,11 @@ const RecentDocs = () => {
 
     const fetchDocument = async () => {
       try {
-        const response = await axios.get(`http://${BASE_URL}/api/documents`);
-        setResponseData(response.data.data.slice(0, 3));
-        console.log(response.data.data);
+        const response = await axios.get(`https://${BASE_URL}/api/documents`);
+        const data = response.data.data;
+        const sortedData = data.sort((a, b) => b.updatedAt - a.updatedAt);
+        setResponseData(sortedData.slice(-3));
+        console.log(sortedData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
