@@ -46,8 +46,6 @@ const AdminOrdinanceManager = () => {
       formDataToSend.append("doc_title", formData.doc_title);
       formDataToSend.append("doc_pdf", formData.doc_pdf);
 
-      console.log(formData);
-      console.log("Request payload:", formDataToSend);
       return fetch(
         `https://${BASE_URL}/api/documents/${editingOrdinance.doc_id}`,
         {
