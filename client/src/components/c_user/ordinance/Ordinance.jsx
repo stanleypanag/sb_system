@@ -39,7 +39,6 @@ const Resolution = () => {
           `https://${BASE_URL}/api/documents/ordinance/`
         );
         setResponseData(response.data.data);
-        console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -84,7 +83,6 @@ const Resolution = () => {
         return containsSearch;
       });
       setFilteredData(filtered);
-      console.log(filtered);
     };
 
     filterData();
