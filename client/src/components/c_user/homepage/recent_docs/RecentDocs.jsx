@@ -38,7 +38,7 @@ const RecentDocs = () => {
         const response = await axios.get(`https://${BASE_URL}/api/documents`);
         const data = response.data.data;
         const sortedData = data.sort((a, b) => b.updatedAt - a.updatedAt);
-        setResponseData(sortedData.slice(-3));
+        setResponseData(sortedData.slice(0, 3));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
